@@ -1,0 +1,6 @@
+.jshintrc
+.htaccess
+.idea
+.DS_Store
+/vendor
+
