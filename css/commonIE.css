@@ -1,0 +1,23 @@
+#pricing {
+    background-color: #3c3f40
+}
+
+#payment-period-container select {
+    background-color: #3c3f40 !important
+}
+
+#photo-modal .slideshow-media-caption {
+    background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+}
+
+#photo-modal .slideshow-media-caption, #photo-modal .slideshow-media-caption .media-photo {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100)
+}
+
+#photo-modal .modal-close, #photo-modal .carousel-chevron {
+    opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100)
+}
