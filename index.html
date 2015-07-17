@@ -29,6 +29,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="image_src"
           href="https://a0.muscache.com/ac/pictures/88395437/8b41049f_original.jpg?interpolation=lanczos-none&size=x_large&output-format=progressive-jpeg&output-quality=70">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="js/custom.js"></script>
 </head>
 <body class="no_wiggle_webkit">
 <div id="header" class="airbnb-header new logged_in">
@@ -50,6 +53,319 @@
               <div class="cover-img hide-sm" data-hook="img -lg" style="background-image: url(images/emotional.jpg)">
               </div>
             </span>
+            <div id="photo-modal" class="modal photo-modal show" role="dialog" data-preload-size="5" aria-hidden="false" tabindex="-1">
+                <div class="modal-table">
+                    <div class="modal-cell">
+                        <button class="carousel-chevron right text-contrast" data-slideshow-next="true">
+                            <span class="screen-reader-only">Next</span>
+                            <i class="icon icon-chevron-right icon-size-4 text-contrast"></i>
+                        </button>
+                        <button class="carousel-chevron left" data-slideshow-prev="true">
+                            <span class="screen-reader-only">Previous</span>
+                            <i class="icon icon-chevron-left icon-size-4 text-contrast"></i>
+                        </button>
+                        <a href="#" class="modal-close" data-behavior="modal-close">
+                            ×
+                            <span class="screen-reader-only">Close</span>
+                        </a>
+                        <div class="modal-content">
+                            <ul class="slideshow-images loading loading-dark">
+                                <li class="media-photo media-photo-block active"><div class="img-contain" data-slideshow-next="true" style="background-image: url(https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)">
+                                </div>
+                                </li><li class="media-photo media-photo-block"><div class="img-contain" data-slideshow-next="true" style="background-image: url(https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)">
+                            </div>
+                            </li>
+
+                            </ul>
+                            <div class="slideshow-preload hide">
+                                <img id="slideshow-preload-1" src="https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+                                <img id="slideshow-preload-2" src="https://a2.muscache.com/ac/pictures/88395453/449263d2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+                                <img id="slideshow-preload-3" src="https://a1.muscache.com/ac/pictures/88393986/4981b1ee_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+                                <img id="slideshow-preload-4" src="https://a1.muscache.com/ac/pictures/88395455/1e76627f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+                                <img id="slideshow-preload-5" src="https://a0.muscache.com/ac/pictures/88395464/a837eb98_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+
+                                <img id="slideshow-preload-6" src="https://a0.muscache.com/ac/pictures/88395472/5aeee9ac_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" alt="">
+
+                            </div>
+                            <div class="slideshow-inline-preload hide">
+                                <img alt="" src="https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70">
+                                <img alt="" src="https://a2.muscache.com/ac/pictures/88395453/449263d2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70">
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <figcaption class="slideshow-media-caption media-caption text-center">
+                                <div class="slideshow-caption-viewport row-space-4">
+                                    <div class="slideshow-caption-container page-container-responsive collapsed">
+                                        <div class="row row-space-2">
+                                            <div class="col-lg-9">
+                                                <div class="slideshow-caption text-left">2/34: Central London Luxury River View</div>
+                                                <div class="text-left">
+                                                    <i class="slideshow-professional text-muted hide">
+                                                        Verified Photo
+                                                    </i>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 text-right">
+                                                Show photo list
+                                                <i class="icon icon-caret-down"></i>
+                                            </div>
+                                        </div>
+                                        <div class="thumbnails-viewport">
+                                            <div class="thumbnails-slide-container">
+                                                <ul class="slideshow-thumbnails thumbnails-slide-panel">
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395437/8b41049f_original.jpg?interpolation=lanczos-none&amp;size=xx_large&amp;output-format=jpg&amp;output-quality=70" data-professional="" title="1/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395437/8b41049f_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow active" href="https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="2/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395453/449263d2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="3/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395453/449263d2_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88393986/4981b1ee_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="4/34: Large bedroom with double bed">
+
+                                                            <img alt="Large bedroom with double bed" src="https://a1.muscache.com/ac/pictures/88393986/4981b1ee_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395455/1e76627f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="5/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395455/1e76627f_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395464/a837eb98_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="6/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395464/a837eb98_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395472/5aeee9ac_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="7/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395472/5aeee9ac_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395486/a81eba97_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="8/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395486/a81eba97_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395494/7c02ba76_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="9/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395494/7c02ba76_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395504/9af44f55_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="10/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395504/9af44f55_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395540/02c8f89d_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="11/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395540/02c8f89d_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395511/2dc6695d_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="12/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395511/2dc6695d_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88394063/0961014a_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="13/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88394063/0961014a_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395519/6aab7c01_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="14/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395519/6aab7c01_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88394049/cb090bd2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="15/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88394049/cb090bd2_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395532/3915b81b_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="16/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395532/3915b81b_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395549/ddb2d887_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="17/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395549/ddb2d887_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395557/edda1a8a_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="18/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395557/edda1a8a_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395561/f9a7fc81_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="19/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395561/f9a7fc81_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395573/f7b76b3f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="20/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395573/f7b76b3f_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395522/cb8abd96_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="21/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395522/cb8abd96_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395669/867e5c96_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="22/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395669/867e5c96_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395579/82cce284_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="23/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395579/82cce284_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395584/5cf168f3_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="24/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395584/5cf168f3_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395594/34624af7_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="25/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395594/34624af7_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395591/deee3263_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="26/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395591/deee3263_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395601/1d853ed0_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="27/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395601/1d853ed0_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395606/cae2b12f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="28/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395606/cae2b12f_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395615/b3c94d1c_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="29/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395615/b3c94d1c_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395627/9d00e2d2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="30/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395627/9d00e2d2_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395633/cb0a959f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="31/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395633/cb0a959f_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a1.muscache.com/ac/pictures/88395647/5bd5f37e_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="32/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a1.muscache.com/ac/pictures/88395647/5bd5f37e_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a0.muscache.com/ac/pictures/88395651/d5dc9621_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="33/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a0.muscache.com/ac/pictures/88395651/d5dc9621_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                    <li class="pull-left">
+                                                        <a class="media-photo media-slideshow" href="https://a2.muscache.com/ac/pictures/88395660/d887f24b_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70" data-professional="" title="34/34: Central London Luxury River View">
+
+                                                            <img alt="Central London Luxury River View" src="https://a2.muscache.com/ac/pictures/88395660/d887f24b_original.jpg?interpolation=lanczos-none&amp;size=small&amp;output-format=jpg&amp;output-quality=70">
+                                                        </a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </figcaption>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="summary" class="panel room-section">
             <div class="page-container-responsive">
@@ -120,7 +436,7 @@
                     <div class="col-lg-4">
                         <form accept-charset="UTF-8" action="/" id="book_it_form" method="post">
                             <div style="margin:0;padding:0;display:inline">
-                                <input name="utf8" type="hidden" value="✓">
+                                <input name="price" type="hidden" value="£250">
                                 <input name="authenticity_token" type="hidden" value="">
                             </div>
                             <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
@@ -191,31 +507,33 @@
                                             </div>
                                         </div>
                                         <div class="js-book-it-status">
-                                            <div class="js-book-it-enabled clearfix hide">
-                                                <div class="js-subtotal-container book-it__subtotal">
-                                                      <span id="subtotal-label" class="text-muted hide">
-                                                        Subtotal
-                                                      </span>
-                                                      <span id="total-label" class="text-muted hide">
-                                                        Total
-                                                      </span>
-
-                                                    <div id="subtotal" class="h1 text-special space-1"></div>
+                                            <div class="js-book-it-enabled clearfix">
+                                                <div class="js-subtotal-container book-it__subtotal panel-padding-fit">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                Price per night
+                                                            </td>
+                                                            <td id="price_night_cell">£250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                Nights count
+                                                            </td>
+                                                            <td id="night_count_cell">3</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Total</td>
+                                                            <td id="total_cell">€2415</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                                 <div class="js-book-it-btn-container">
-                                                    <button type="submit"
-                                                            class="js-book-it-btn btn btn-large btn-block btn-primary">
+                                                    <button type="button" class="js-book-it-btn btn btn-large btn-block btn-primary" id="start-booking">
                                                         <span class="book-it__btn-text">
-                                                          Request to Book
-                                                        </span>
-
-                                                        <span class="book-it__btn-text--instant">
-                                                          <i class="icon icon-bolt text-beach h4 book-it__instant-book-icon"></i>
-                                                          Instant Book
-                                                        </span>
-
-                                                        <span class="book-it__btn-text--instant-alt">
-                                                          Book Now
+                                                          Book
                                                         </span>
                                                     </button>
                                                 </div>
@@ -226,7 +544,7 @@
                                                 </p>
                                             </div>
 
-                                            <div id="book_it_disabled" class="text-center">
+                                            <div id="book_it_disabled" class="text-center hide">
                                                 <p id="book_it_disabled_message" class="icon-rausch">Please specify
                                                     check in and check out dates</p>
                                                 <a href="" class="btn btn-large btn-block"
@@ -310,11 +628,6 @@
                                             <div class="col-md-6">
                                                 <strong>1 night</strong> minimum stay
                                             </div>
-                                            <div class="col-md-6">
-                                                <a id="view-calendar" href="#">
-                                                    <strong>View Calendar</strong>
-                                                </a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -323,7 +636,7 @@
                                         <div class="col-6 row-full-height">
                                             <a class="photo-grid-photo photo-trigger"
                                                style="background-image: url(https://a1.muscache.com/ac/pictures/88395446/56626934_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)"
-                                               href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                               href="#"
                                                data-index="1">
                                                 <img src="images/56626934_original.jpg" class="hide"
                                                      alt="Central London Luxury River View">
@@ -333,7 +646,7 @@
                                         <div class="col-6 row-full-height">
                                             <a class="photo-grid-photo photo-trigger"
                                                style="background-image: url(https://a2.muscache.com/ac/pictures/88395453/449263d2_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)"
-                                               href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                               href="#"
                                                data-index="2">
                                                 <img src="images/449263d2_original.jpg" class="hide"
                                                      alt="Central London Luxury River View">
@@ -345,7 +658,7 @@
                                         <div class="col-4 row-full-height">
                                             <a class="photo-grid-photo photo-trigger"
                                                style="background-image: url(https://a1.muscache.com/ac/pictures/88393986/4981b1ee_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)"
-                                               href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                               href="#"
                                                data-index="3">
                                                 <img src="images/4981b1ee_original.jpg" class="hide"
                                                      alt="Large bedroom with double bed">
@@ -356,7 +669,7 @@
                                         <div class="col-4 row-full-height">
                                             <a class="photo-grid-photo photo-trigger"
                                                style="background-image: url(https://a1.muscache.com/ac/pictures/88395455/1e76627f_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)"
-                                               href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                               href="#"
                                                data-index="4">
                                                 <img src="images/1e76627f_original.jpg" class="hide"
                                                      alt="Central London Luxury River View">
@@ -369,7 +682,7 @@
                                                 <div class="media-cover media-cover-dark">
                                                     <a class="photo-grid-photo photo-trigger"
                                                        style="background-image: url(https://a0.muscache.com/ac/pictures/88395464/a837eb98_original.jpg?interpolation=lanczos-none&amp;size=x_large&amp;output-format=progressive-jpeg&amp;output-quality=70)"
-                                                       href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                                       href="#"
                                                        data-index="5">
                                                         <img src="images/a837eb98_original.jpg" class="hide"
                                                              alt="Central London Luxury River View">
@@ -377,7 +690,7 @@
 
                                                 </div>
                                                 <a class="photo-trigger"
-                                                   href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#"
+                                                   href="#"
                                                    data-index="5">
                                                     <div class="row row-table row-full-height">
                                                         <div class="col-12 col-middle text-center text-contrast">
@@ -478,11 +791,75 @@
                 </div>
             </div>
         </div>
+    </div>
 </main>
 
 <div id="footer" class="container-brand-dark footer-surround footer-container">
     <footer class="page-container-responsive">
     </footer>
+</div>
+<div class="modal hide" role="dialog" aria-hidden="false" aria-labelledby="signup-modal-content" aria-describedby="signup-modal-content" tabindex="-1">
+    <div class="modal-table">
+        <div class="modal-cell">
+            <div class="modal-content signup" id="signup-modal-content">
+                <div class="alert alert-with-icon alert-error alert-header panel-header hidden-element notice"
+                     id="notice">
+                    <i class="icon alert-icon icon-alert-alt"></i>
+
+                </div>
+                <div class="panel-padding panel-body">
+                    <div class="text-center social-links">
+                        Please enter your booking details
+                        <hr>
+                    </div>
+                    <form accept-charset="UTF-8" action="/create" class="signup-form" data-action="Signup" id="user_new"
+                          method="post">
+                        <div class="signup-form-fields">
+                            <input id="from" name="from" type="hidden" value="email_signup">
+                            <input id="referral_signup_default_redirect" name="referral_signup_default_redirect"
+                                   type="hidden" value="false">
+
+
+                            <div class="control-group row-space-1 invalid" id="inputFirst">
+                                <label for="user[first_name]" generated="true" class="invalid">First name is required.</label>
+                                <input type="text" name="user[first_name]" placeholder="First name"
+                                       class="decorative-input invalid" value="">
+                            </div>
+
+                            <div class="control-group row-space-1" id="inputLast">
+                                <input type="text" name="user[last_name]" placeholder="Last name"
+                                       class="decorative-input inspectletIgnore" value="">
+                            </div>
+
+                            <div class="control-group row-space-1" id="inputEmail">
+                                <input type="email" name="user[email]" placeholder="Email address" value=""
+                                       class="decorative-input inspectletIgnore">
+
+                            </div>
+                            <div class="control-group row-space-1" id="inputAddress">
+                                <input type="text" name="user[address]" placeholder="Address" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputCity">
+                                <input type="text" name="user[city]" placeholder="City" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputZip">
+                                <input type="text" name="user[zip]" placeholder="Postal code" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputCountry">
+                                <input type="text" name="user[country]" placeholder="Country" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputTel">
+                                <input type="text" name="user[tel]" placeholder="Phone number" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-large">
+                                Confirm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

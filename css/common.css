@@ -3681,11 +3681,11 @@ input[type="checkbox"]:checked:before {
     content: '\f12c'
 }
 
-.icon-chevron-left:before {
+.icon-chevron-left:before, .ui-datepicker-prev:before {
     content: '\f12d'
 }
 
-.icon-chevron-right:before {
+.icon-chevron-right:before, .ui-datepicker-next:before {
     content: '\f12e'
 }
 
@@ -9203,4 +9203,18 @@ ul.label-list .label {
 
 h3.listing-name {
     margin: 6.25px 0 0
+}
+
+.ui-datepicker-today a.ui-state-highlight {
+    border-color: #d3d3d3;
+    background-color: #ffffff;
+    color: #555555;
+}
+
+.ui-datepicker-today a.ui-state-highlight.ui-state-active{
+    background-color: #ff5a5f;
+    color: white;
+    border-color: #ff5a5f;
+    margin: -1px;
+    width: 34px;
 }
