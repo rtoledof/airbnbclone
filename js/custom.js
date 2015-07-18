@@ -61,6 +61,17 @@ $(function() {
         e.preventDefault();
     });
 
+    $('#lightGallery').lightGallery({
+        addClass: 'showThumbByDefault',
+        loop: true,
+        mode: "slide",
+        useCSS: true,
+        cssEasing: "ease",
+        thumbnail: true,
+        showThumbByDefault: true,
+        animateThumb: false
+    });
+
 });
 
 

@@ -9218,3 +9218,48 @@ h3.listing-name {
     margin: -1px;
     width: 34px;
 }
+
+.showThumbByDefault #lg-gallery.open .lg-slide {
+    padding-bottom: 120px;
+}
+.showThumbByDefault #lg-gallery .thumb-cont .thumb-info{
+    display:none;
+}
+/*/ actions */
+.showThumbByDefault #lg-action {
+    position: static;
+}
+.showThumbByDefault #lg-action a {
+    margin-top: -14px !important;
+    position: absolute;
+    top: 50%;
+    z-index: 9999999;
+    background-color: transparent;
+    font-size: 28px;
+}
+.showThumbByDefault #lg-action a#lg-prev {
+    left: 17px;
+}
+.showThumbByDefault #lg-action a#lg-next {
+    right: 17px;
+}
+
+ul#lightGallery{
+    list-style: none;
+    padding: 10px 0 0 0;
+    margin:0;
+}
+
+ul#lightGallery li{
+    margin-bottom:3px;
+    cursor: pointer;
+}
+ul#lightGallery li.featured-height img {
+    width: 325px;
+    height: 282px;
+}
+
+ul#lightGallery li.supporting-height img {
+    width: 215px;
+    height: 141px;
+}
