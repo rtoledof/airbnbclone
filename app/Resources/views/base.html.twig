@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--[if IE]><![endif]-->
+    <meta charset="utf-8">
+    {% block stylesheets %}
+    <!--[if IE 8]>
+    <link href="{{ asset('css/commonIE8.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <!--[if !(IE 8)]><!-->
+    <link href="{{ asset('css/common.css') }}" media="all" rel="stylesheet" type="text/css">
+    <!--<![endif]-->
+
+    <!--[if lt IE 9]>
+    <link href="{{ asset('css/commonIE9.css') }}" media="all" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+
+    <!--[if IE]>
+    <link href="{{ asset('css/commonIE.css') }}" media="screen" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <link href="{{ asset('css/main.css') }}" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/lightGallery.css') }}" media="screen" rel="stylesheet" type="text/css">
+    {% endblock %}
+    <title>
+        {% block title %}
+            Central London Luxury River View in London
+        {% endblock %}
+    </title>
+    <meta name="description" content="{% block description %} Description {% endblock %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block javascripts %}
+    <script src="{{ asset('http://code.jquery.com/jquery-1.10.2.js') }}"></script>
+    <script src="{{ asset('http://code.jquery.com/ui/1.11.4/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/lightGallery.min.js') }}"></script>
+    {% endblock %}
+</head>
+<body class="no_wiggle_webkit">
+<div id="header" class="airbnb-header new logged_in">
+    <header class="regular-header clearfix hide-sm" id="old-header" role="banner">
+        <a aria-label="Homepage" href="/" class="header-belo pull-left">
+            <span class="screen-reader-only">
+              Airbnb
+            </span>
+        </a>
+    </header>
+</div>
+
+<main id="site-content" role="main">
+    {% block body %}{% endblock %}
+</main>
+
+<div id="footer" class="container-brand-dark footer-surround footer-container">
+    <footer class="page-container-responsive">
+    </footer>
+</div>
+<div class="modal hide" role="dialog" aria-hidden="false" aria-labelledby="signup-modal-content" aria-describedby="signup-modal-content" tabindex="-1">
+    <div class="modal-table">
+        <div class="modal-cell">
+            <div class="modal-content signup" id="signup-modal-content">
+                <div class="alert alert-with-icon alert-error alert-header panel-header hidden-element notice"
+                     id="notice">
+                    <i class="icon alert-icon icon-alert-alt"></i>
+
+                </div>
+                <div class="panel-padding panel-body">
+                    <div class="text-center social-links">
+                        Please enter your booking details
+                        <hr>
+                    </div>
+                    <form accept-charset="UTF-8" action="/create" class="signup-form" data-action="Signup" id="user_new"
+                          method="post">
+                        <div class="signup-form-fields">
+                            <input id="from" name="from" type="hidden" value="email_signup">
+                            <input id="referral_signup_default_redirect" name="referral_signup_default_redirect"
+                                   type="hidden" value="false">
+
+
+                            <div class="control-group row-space-1 invalid" id="inputFirst">
+                                <label for="user[first_name]" generated="true" class="invalid">First name is required.</label>
+                                <input type="text" name="user[first_name]" placeholder="First name"
+                                       class="decorative-input invalid" value="">
+                            </div>
+
+                            <div class="control-group row-space-1" id="inputLast">
+                                <input type="text" name="user[last_name]" placeholder="Last name"
+                                       class="decorative-input inspectletIgnore" value="">
+                            </div>
+
+                            <div class="control-group row-space-1" id="inputEmail">
+                                <input type="email" name="user[email]" placeholder="Email address" value=""
+                                       class="decorative-input inspectletIgnore">
+
+                            </div>
+                            <div class="control-group row-space-1" id="inputAddress">
+                                <input type="text" name="user[address]" placeholder="Address" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputCity">
+                                <input type="text" name="user[city]" placeholder="City" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputZip">
+                                <input type="text" name="user[zip]" placeholder="Postal code" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputCountry">
+                                <input type="text" name="user[country]" placeholder="Country" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <div class="control-group row-space-1" id="inputTel">
+                                <input type="text" name="user[tel]" placeholder="Phone number" value="" class="decorative-input inspectletIgnore">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-large">
+                                Confirm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
