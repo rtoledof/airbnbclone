@@ -22,7 +22,8 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+    height:100%;
 }
 
 a {
@@ -9262,4 +9263,61 @@ ul#lightGallery li.featured-height img {
 ul#lightGallery li.supporting-height img {
     width: 215px;
     height: 141px;
+}
+
+.searchbar__input-wrapper {
+  float: left;
+}
+
+.saved-search-wrapper {
+  position: relative;
+}
+
+.searchbar__location, .searchbar__location-error {
+  width: 900px;
+}
+
+.input-placeholder-group {
+  position: relative;
+  display: inline-block;
+}
+
+.searchbar__location, .searchbar__checkin, .searchbar__checkout, .searchbar__guests, .searchbar__submit {
+  float: left;
+  margin: 0 -1px 0 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  vertical-align: middle;
+}
+
+.searchbar input, .searchbar select, .searchbar button, .searchbar .select {
+  display: block;
+  height: 44px;
+}
+
+.searchbar__submit {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  display: inline-block;
+}
+
+.btn-large {
+  padding: 9px 27px;
+  font-size: 16px;
+}
+
+#footer, #site-content:after{
+    position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 100px;
+        width: 100%;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin: 0 0 100px; /* bottom = footer height */
 }

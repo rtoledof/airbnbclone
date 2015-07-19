@@ -72,6 +72,10 @@ $(function() {
         animateThumb: false
     });
 
+    $("#submit_location").click(function(){
+        $(".searchbar__input-wrapper").addClass("loading");
+    });
+
 });
 
 

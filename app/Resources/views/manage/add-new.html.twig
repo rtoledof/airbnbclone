@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="subnav hide-print">
+      <div class="page-container-responsive">
+        <ul class="subnav-list">
+          <li>
+            <a href="/dashboard" aria-selected="true" class="subnav-item">Add new page</a>
+          </li>
+          <li>
+            <a href="/inbox" aria-selected="false" class="subnav-item">See added pages</a>
+          </li>
+          <li>
+            <a href="/rooms" aria-selected="false" class="subnav-item">Jump to a random page</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+        <div id="discovery-container">
+            <div class="discovery-section page-container-responsive page-container-no-padding row-space-6"
+                 id="discover-recommendations">
+                <div class="section-intro text-center row-space-6 row-space-top-8">
+                    <h2 class="row-space-1">
+                        <strong>Add new page</strong>
+                    </h2>
+                </div>
+                <div class="discovery-tiles">
+                    <div class="hero__content-footer hide-sm">
+                        <div id="searchbar">
+                            <div class="searchbar">
+                                <form id="searchbar-form" method="get">
+                                    <div class="saved-search-wrapper searchbar__input-wrapper">
+                                        <label class="input-placeholder-group searchbar__location">
+                                            <span class="input-placeholder-label screen-reader-only">
+                                                Please enter a source url
+                                            </span>
+                                            <input class="menu-autocomplete-input form-inline location input-large input-contrast"
+                                                   placeholder="Please enter a source url" type="text" name="location"
+                                                   id="location" aria-autocomplete="both"
+                                                   aria-owns="autocomplete-menu-sb17e958a" autocomplete="off" value="">
+                                        </label>
+                                    </div>
+                                    <button id="submit_location" type="submit"
+                                            class="searchbar__submit btn btn-primary btn-large">
+                                        Save
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-container-responsive space-top-4 space-4">
+            <div class="row">
+                <div class="col-md-14">
+                    <div class="panel space-4">
+                        <div class="panel-header">
+                            Result box
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled hdb-light-bg">
+                                <li class="default removable  alert1 " data-alert-id="293943858">
+                                    <div class="row row-table ">
+                                        <div class="col-11 col-middle">
+                                            <a class="dashboard_alert_link" href="/users/edit">
+                                                Введите свой адрес доставки. Иногда мы отправляем подарки.
+                                                <i class="icon icon-caret-right"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-1 col-middle">
+                                            <a href="/home/remove_dashboard_alert/293943858"
+                                               class="pull-right icon-light-gray remove-alert"
+                                               title="Скрыть оповещение">
+                                                <i class="icon icon-remove"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <hr class="section-divider">
+                                </li>
+                                <li class="default   alert2 " data-alert-id="139866703">
+                                    <div class="row row-table ">
+                                        <div class="col-11 col-middle">
+                      <span class="dashboard_alert_text">
+                        Пожалуйста, подтвердите ваш адрес электронной почты, перейдя по ссылке, которую мы вам только что выслали. Если вы не получили нашего письма, <a
+                                  href="/users/request_new_confirm_email">запросите новое подтверждение</a> либо <a
+                                  href="/users/edit">введите другой адрес</a>.
+                      </span>
+
+                                        </div>
+                                        <div class="col-1 col-middle">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
