@@ -3174,7 +3174,7 @@ input:-ms--placeholder, textarea:-ms--placeholder, .input-prefix:-ms--placeholde
     border-color: #aaa
 }
 
-.invalid[type="text"], .invalid[type="password"], .invalid[type="search"], .invalid[type="email"], .invalid[type="url"], .invalid[type="number"], .invalid[type="tel"], textarea.invalid, select.invalid, input.invalid[type="radio"], input.invalid[type="checkbox"], [type="text"]:invalid, [type="password"]:invalid, [type="search"]:invalid, [type="email"]:invalid, [type="url"]:invalid, [type="number"]:invalid, [type="tel"]:invalid, textarea:invalid, select:invalid, input[type="radio"]:invalid, input[type="checkbox"]:invalid {
+[type="text"]:invalid, [type="password"]:invalid, [type="search"]:invalid, [type="email"]:invalid, [type="url"]:invalid, [type="number"]:invalid, [type="tel"]:invalid, textarea:invalid, select:invalid, input[type="radio"]:invalid, input[type="checkbox"]:invalid {
     border-color: #ffb400;
     background-color: #fff8e5
 }
@@ -9320,4 +9320,11 @@ html {
 }
 body {
     margin: 0 0 100px; /* bottom = footer height */
+}
+
+.errors ul{
+    list-style: none;
+    color:#ff5a5f;
+    margin:0;
+    padding:0;
 }

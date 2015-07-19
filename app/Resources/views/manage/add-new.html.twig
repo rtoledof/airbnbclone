@@ -2,19 +2,19 @@
 
 {% block body %}
     <div class="subnav hide-print">
-      <div class="page-container-responsive">
-        <ul class="subnav-list">
-          <li>
-            <a href="/dashboard" aria-selected="true" class="subnav-item">Add new page</a>
-          </li>
-          <li>
-            <a href="/inbox" aria-selected="false" class="subnav-item">See added pages</a>
-          </li>
-          <li>
-            <a href="/rooms" aria-selected="false" class="subnav-item">Jump to a random page</a>
-          </li>
-        </ul>
-      </div>
+        <div class="page-container-responsive">
+            <ul class="subnav-list">
+                <li>
+                    <a href="/manage/add" aria-selected="true" class="subnav-item">Add new page</a>
+                </li>
+                <li>
+                    <a href="/inbox" aria-selected="false" class="subnav-item">See added pages</a>
+                </li>
+                <li>
+                    <a href="/rooms" aria-selected="false" class="subnav-item">Jump to a random page</a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="row">
         <div id="discovery-container">
@@ -29,23 +29,20 @@
                     <div class="hero__content-footer hide-sm">
                         <div id="searchbar">
                             <div class="searchbar">
-                                <form id="searchbar-form" method="get">
-                                    <div class="saved-search-wrapper searchbar__input-wrapper">
-                                        <label class="input-placeholder-group searchbar__location">
+                                {{ form_start(form) }}
+                                <div class="saved-search-wrapper searchbar__input-wrapper">
+                                    <label class="input-placeholder-group searchbar__location">
                                             <span class="input-placeholder-label screen-reader-only">
                                                 Please enter a source url
                                             </span>
-                                            <input class="menu-autocomplete-input form-inline location input-large input-contrast"
-                                                   placeholder="Please enter a source url" type="text" name="location"
-                                                   id="location" aria-autocomplete="both"
-                                                   aria-owns="autocomplete-menu-sb17e958a" autocomplete="off" value="">
-                                        </label>
-                                    </div>
-                                    <button id="submit_location" type="submit"
-                                            class="searchbar__submit btn btn-primary btn-large">
-                                        Save
-                                    </button>
-                                </form>
+                                        {{ form_widget(form.url) }}
+                                        <div class="errors">
+                                            {{ form_errors(form.url) }}
+                                        </div>
+                                    </label>
+                                </div>
+                                {{ form_widget(form.submit_location) }}
+                                {{ form_end(form) }}
                             </div>
                         </div>
                     </div>
@@ -82,14 +79,9 @@
                                 <li class="default   alert2 " data-alert-id="139866703">
                                     <div class="row row-table ">
                                         <div class="col-11 col-middle">
-                      <span class="dashboard_alert_text">
-                        Пожалуйста, подтвердите ваш адрес электронной почты, перейдя по ссылке, которую мы вам только что выслали. Если вы не получили нашего письма, <a
-                                  href="/users/request_new_confirm_email">запросите новое подтверждение</a> либо <a
-                                  href="/users/edit">введите другой адрес</a>.
-                      </span>
-
-                                        </div>
-                                        <div class="col-1 col-middle">
+                                          <span class="dashboard_alert_text">
+                                            {{ dump(response) }}
+                                          </span>
                                         </div>
                                     </div>
                                 </li>
