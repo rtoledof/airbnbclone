@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\ImagesGenerator;
+use AppBundle\Entity\PageFactory;
 use AppBundle\Entity\RequestUrl;
 use AppBundle\Parser\HtmlParser;
 use AppBundle\Parser\RemoteDataCollector;
@@ -54,6 +56,13 @@ class ManageController extends Controller
             $response = $collector->collect();
             $parser = new HtmlParser();
             $response = $parser->parse($response);
+
+            $em = $this->getDoctrine()->getManager();
+            $ds = DIRECTORY_SEPARATOR;
+            $uploadPath = $this->get('kernel')->getRootDir() . $ds . '..' . $ds . 'web' . $ds . 'uploads' . $ds;
+            $generator = new ImagesGenerator($em, $uploadPath);
+            $pageFactory = new PageFactory($em, $generator);
+            $page = $pageFactory->createPage($urlEntity->getUrl(), $response);
         }
         return $this->render('manage/add-new.html.twig', array(
             'form' => $form->createView(),
