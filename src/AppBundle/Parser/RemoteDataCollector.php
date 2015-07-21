@@ -31,7 +31,7 @@ class RemoteDataCollector implements DataCollector
                     'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36 FirePHP/0.7.4',
                     'Connection' => 'keep-alive',
                     'Cache-Control' => 'max-age=0',
-                    'Accept-Language' => 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,de;q=0.2,nl;q=0.2',
+                    'Accept-Language' => 'en-GB,en;q=0.8,en-US;q=0.6,en;q=0.4,de;q=0.2,nl;q=0.2',
                     'Accept-Encoding' => 'gzip, deflate, sdch'
                 )
             )
