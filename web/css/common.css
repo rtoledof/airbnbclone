@@ -9328,3 +9328,7 @@ body {
     margin:0;
     padding:0;
 }
+
+a .icon-remove:hover{
+    text-decoration: none;
+}

@@ -2,7 +2,7 @@
 
 namespace AppBundle\Parser;
 
-class SecureDataContainer
+class XPathContainer
 {
     /**
      * @var \DOMXPath

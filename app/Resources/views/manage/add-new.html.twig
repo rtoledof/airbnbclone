@@ -8,10 +8,13 @@
                     <a href="/manage/add" aria-selected="true" class="subnav-item">Add new page</a>
                 </li>
                 <li>
-                    <a href="/inbox" aria-selected="false" class="subnav-item">See added pages</a>
+                    <a href="/bookings" aria-selected="false" class="subnav-item">See bookings</a>
                 </li>
                 <li>
-                    <a href="/rooms" aria-selected="false" class="subnav-item">Jump to a random page</a>
+                    <a href="/pages" aria-selected="false" class="subnav-item">See added pages</a>
+                </li>
+                <li>
+                    <a href="/page/random" aria-selected="false" class="subnav-item">Jump to a random page</a>
                 </li>
             </ul>
         </div>
@@ -35,9 +38,9 @@
                                             <span class="input-placeholder-label screen-reader-only">
                                                 Please enter a source url
                                             </span>
-                                        {{ form_widget(form.url) }}
+                                        {{ form_widget(form.sourceUrl) }}
                                         <div class="errors">
-                                            {{ form_errors(form.url) }}
+                                            {{ form_errors(form.sourceUrl) }}
                                         </div>
                                     </label>
                                 </div>
@@ -56,37 +59,30 @@
                         <div class="panel-header">
                             Result box
                         </div>
+                        {% if url %}
                         <div class="panel-body">
                             <ul class="list-unstyled hdb-light-bg">
-                                {#<li class="default removable  alert1 " data-alert-id="293943858">#}
-                                    {#<div class="row row-table ">#}
-                                        {#<div class="col-11 col-middle">#}
-                                            {#<a class="dashboard_alert_link" href="/users/edit">#}
-                                                {#Введите свой адрес доставки. Иногда мы отправляем подарки.#}
-                                                {#<i class="icon icon-caret-right"></i>#}
-                                            {#</a>#}
-                                        {#</div>#}
-                                        {#<div class="col-1 col-middle">#}
-                                            {#<a href="/home/remove_dashboard_alert/293943858"#}
-                                               {#class="pull-right icon-light-gray remove-alert"#}
-                                               {#title="Скрыть оповещение">#}
-                                                {#<i class="icon icon-remove"></i>#}
-                                            {#</a>#}
-                                        {#</div>#}
-                                    {#</div>#}
-                                    {#<hr class="section-divider">#}
-                                {#</li>#}
-                                <li class="default   alert2 " data-alert-id="139866703">
+                                <li class="default removable  alert1 " data-alert-id="293943858">
                                     <div class="row row-table ">
                                         <div class="col-11 col-middle">
-                                          <span class="dashboard_alert_text">
-                                            {{ dump(response) }}
-                                          </span>
+                                            The page data is successfully parsed. New page is available under
+                                            <a class="dashboard_alert_link" href="{{ url }}" target="_blank">
+                                                this url
+                                            </a>
+                                        </div>
+                                        <div class="col-1 col-middle">
+                                            <a href="#"
+                                               class="pull-right icon-light-gray remove-alert"
+                                               title="Hide">
+                                                <i class="icon icon-remove"></i>
+                                            </a>
                                         </div>
                                     </div>
+                                    <hr class="section-divider">
                                 </li>
                             </ul>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

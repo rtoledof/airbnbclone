@@ -3,7 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\ImagesGenerator;
-use AppBundle\Entity\PageFactory;
+use AppBundle\Entity\ImageFactory;
+use AppBundle\Entity\Pages;
 use AppBundle\Entity\RequestUrl;
 use AppBundle\Parser\HtmlParser;
 use AppBundle\Parser\RemoteDataCollector;
@@ -24,10 +25,12 @@ class ManageController extends Controller
      */
     public function addAction(Request $request)
     {
-        $urlEntity = new RequestUrl();
+        $page = new Pages();
+        $page->setVersion('1.0');
+        $page->setDate(new \DateTime());
         $form = $this
-            ->createFormBuilder($urlEntity, array('attr' => array('id' => 'searchbar-form'), 'method' => 'POST'))
-            ->add('url', 'text', array(
+            ->createFormBuilder($page, array('attr' => array('id' => 'searchbar-form'), 'method' => 'POST'))
+            ->add('sourceUrl', 'text', array(
                     'attr' =>
                         array(
                             'class' => 'menu-autocomplete-input form-inline location input-large input-contrast',
@@ -50,23 +53,27 @@ class ManageController extends Controller
             )
             ->getForm();
         $form->handleRequest($request);
-        $response = null;
+        $resultUl = null;
         if ($form->isSubmitted() && $form->isValid()) {
-            $collector = new RemoteDataCollector($urlEntity->getUrl());
+            $collector = new RemoteDataCollector($page->getSourceUrl());
             $response = $collector->collect();
             $parser = new HtmlParser();
             $response = $parser->parse($response);
+            $page->setRawdata($response);
 
             $em = $this->getDoctrine()->getManager();
             $ds = DIRECTORY_SEPARATOR;
             $uploadPath = $this->get('kernel')->getRootDir() . $ds . '..' . $ds . 'web' . $ds . 'uploads' . $ds;
-            $generator = new ImagesGenerator($em, $uploadPath);
-            $pageFactory = new PageFactory($em, $generator);
-            $page = $pageFactory->createPage($urlEntity->getUrl(), $response);
+            $em->persist($page);
+            $em->flush();
+            $imagesFactory = new ImageFactory($em, $uploadPath);
+            $imagesFactory->processImages($page);
+            $resultUl = '/rooms/' . $page->getId();
         }
+
         return $this->render('manage/add-new.html.twig', array(
             'form' => $form->createView(),
-            'response' => $response
+            'url' => $resultUl
         ));
     }
 

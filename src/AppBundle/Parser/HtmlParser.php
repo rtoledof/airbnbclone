@@ -15,7 +15,7 @@ class HtmlParser implements Parser
     {
         $result = array();
 
-        $htmlContainer = new SecureDataContainer($rawBody);
+        $htmlContainer = new XPathContainer($rawBody);
 
         $result['gallery'] = $htmlContainer->getSingleValue(
             '//meta[@id="_bootstrap-room_options"]/@content'

@@ -4,13 +4,17 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\Images;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pages
  *
  * @ORM\Table(name="pages")
  * @ORM\Entity
+ * @UniqueEntity(fields={"sourceUrl"}, message="This url was already processed")
  */
 class Pages
 {
@@ -52,7 +56,9 @@ class Pages
 
     /**
      * @var string
-     * @ORM\Column(name="source_url", type="string", length=255)
+     * @ORM\Column(name="source_url", type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Url()
      */
     private $sourceUrl;
 
@@ -166,7 +172,7 @@ class Pages
     /**
      * Get images
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getImages()
     {
