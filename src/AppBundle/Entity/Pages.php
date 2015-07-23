@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="pages")
  * @ORM\Entity
  * @UniqueEntity(fields={"sourceUrl"}, message="This url was already processed")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\PageRepository")
  */
 class Pages
 {
@@ -172,7 +173,7 @@ class Pages
     /**
      * Get images
      *
-     * @return Collection
+     * @return Images[]
      */
     public function getImages()
     {

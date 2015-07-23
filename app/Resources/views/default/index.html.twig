@@ -5,14 +5,16 @@
 
 {% block body %}
     <div id="room" itemscope="" itemtype="http://schema.org/Product">
+        {% if images['background'] is not empty %}
         <div id="photos" class="with-photos with-modal">
             <span class="cover-img-container" data-hook="cover-img-container">
-              <div class="cover-img show-sm" data-hook="img-sm" style="background-image: url(images/emotional.jpg);">
+              <div class="cover-img show-sm" data-hook="img-sm" style="background-image: url(/uploads/{{ images['background']|first.getPath() }});">
               </div>
-              <div class="cover-img hide-sm" data-hook="img -lg" style="background-image: url(images/emotional.jpg)">
+              <div class="cover-img hide-sm" data-hook="img -lg" style="background-image: url(/uploads/{{ images['background']|first.getPath() }})">
               </div>
             </span>
         </div>
+        {% endif %}
         <div id="summary" class="panel room-section">
             <div class="page-container-responsive">
                 <div class="row">
@@ -23,7 +25,7 @@
                                     <div class="media-photo-badge">
                                         <a href="#" class="media-photo media-round">
                                             <img alt="User Profile Image" class="host-profile-image"
-                                                 data-pin-nopin="true" height="115" src="images/original(1).jpg"
+                                                 data-pin-nopin="true" height="115" src="/uploads/{{ images['user']|first.getPath() }}"
                                                  title="{{ container.get('user-name') }}" width="115">
                                         </a>
                                     </div>
@@ -39,18 +41,13 @@
                                         <a href="#" class="link-reset">{{ container.get('address') }}</a>
                                     </div>
                                     <div class="row row-condensed text-muted text-center">
+                                        {% for icon in container.get('room-detail-icons')  %}
                                         <div class="col-sm-3">
-                                            <i class="icon icon-entire-place icon-size-2"></i>
+                                            {% autoescape false %}
+                                            {{ icon }}
+                                            {% endautoescape %}
                                         </div>
-                                        <div class="col-sm-3">
-                                            <i class="icon icon-group icon-size-2"></i>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <i class="icon icon-rooms icon-size-2"></i>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <i class="icon icon-double-bed icon-size-2"></i>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -60,18 +57,11 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row row-condensed text-muted text-center">
+                                        {% for title in container.get('room-detail-titles') %}
                                         <div class="col-sm-3">
-                                            Entire home/flat
+                                            {{ title }}
                                         </div>
-                                        <div class="col-sm-3">
-                                            6 Guests
-                                        </div>
-                                        <div class="col-sm-3">
-                                            2 Bedrooms
-                                        </div>
-                                        <div class="col-sm-3">
-                                            3 Beds
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +74,7 @@
                                 <input name="authenticity_token" type="hidden" value="">
                             </div>
                             <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                <div id="price_amount" class="book-it-price-amount pull-left h3 text-special">£250</div>
+                                <div id="price_amount" class="book-it-price-amount pull-left h3 text-special">{{ container.get('priceNight') }}</div>
                                 <i class="icon icon-bolt icon-beach pull-left h3 pricing__bolt"></i>
 
                                 <div id="payment-period-container" class="pull-right">
@@ -189,10 +179,8 @@
                                             </div>
 
                                             <div id="book_it_disabled" class="text-center hide">
-                                                <p id="book_it_disabled_message" class="icon-rausch">Please specify
-                                                    check in and check out dates</p>
-                                                <a href="" class="btn btn-large btn-block"
-                                                   id="view_other_listings_button">
+                                                <p id="book_it_disabled_message" class="icon-rausch">Please specify check in and check out dates</p>
+                                                <a href="" class="btn btn-large btn-block" id="view_other_listings_button">
                                                     View Other Listings
                                                 </a>
                                             </div>
@@ -246,70 +234,63 @@
                     <div class="col-lg-8" id="details-column">
                         <div class="row-space-8 row-space-top-8">
                             <h4 class="row-space-4 text-center-sm">
-                                About This Listing
+                                {{ container.get('description-title') }}
                             </h4>
-
-                            <p>Five star Luxury apartment Thames river view from the balcony.
-                                <br>Walking distance to Westminster Big Ben, parliament, London Eye, major museums,
-                                galleries and theaters.
-                                <br>Very large apartment with top quality furniture.
-                                <br>24 hours security concierge.
-                            </p>
-
+                            {% autoescape false %}
+                            {{ container.get('description-summary', '') }}
+                            {{ container.get('description-space') }}
+                            {{ container.get('description-amenities') }}
+                            {{ container.get('description-longtext') }}
+                            {{ container.get('description-house-rules') }}
+                            {{ container.get('description-safety') }}
+                            {% endautoescape %}
                             <div class="js-p3-safety-features-section">
                                 <div class="row">
                                     <hr>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="text-muted">
-                                            Availability
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <strong>1 night</strong> minimum stay
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% if(images['gallery'] is not empty) %}
                                 <ul id="lightGallery" class="photo-grid row-space-4 row-space-top-4">
-                                    <li data-src="images/56626934_original.jpg" class="col-6 featured-height">
-                                        <img src="images/56626934_original.jpg" width="330" height="282"/>
-                                    </li>
-                                    <li data-src="images/1e76627f_original.jpg" class="col-6 featured-height">
-                                        <img src="images/1e76627f_original.jpg" width="330" height="282"/>
-                                    </li>
-                                    <li data-src="images/c4e9e396_original.jpg" class="col-4 supporting-height">
-                                        <img src="images/c4e9e396_original.jpg" width="217" height="141"/>
-                                    </li>
-                                    <li data-src="images/a837eb98_original.jpg" class="col-4 supporting-height">
-                                        <img src="images/a837eb98_original.jpg" width="217" height="141"/>
-                                    </li>
-                                    <li data-src="images/449263d2_original.jpg" class="col-4 supporting-height">
-                                        <div class="media-cover media-cover-dark">
-                                            <img src="images/449263d2_original.jpg" width="217" height="141"/>
-                                        </div>
-                                        <div class="row row-table row-full-height">
-                                            <div class="col-12 col-middle text-center text-contrast">
-                                                <div class="h5">
-                                                    See all 34 photos
+                                    {% if(images['gallery']['featured'] is not empty) %}
+                                        {% for image in images['gallery']['featured']  %}
+                                            <li data-src="/uploads/{{ image.getPath() }}" class="col-6 featured-height">
+                                                <img src="/uploads/{{ image.getPath() }}" width="330" height="282" alt="{{ image.getTitle() }}"/>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if(images['gallery']['supporting'] is not empty) %}
+                                        {% for image in images['gallery']['supporting']  %}
+                                            <li data-src="/uploads/{{ image.getPath() }}" class="col-4 supporting-height">
+                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141" alt="{{ image.getTitle() }}"/>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if(images['gallery']['last'] is not empty) %}
+                                        <li data-src="/uploads/{{ images['gallery']['last'].getPath() }}" class="col-4 supporting-height">
+                                            {% if(images['gallery']['count'] > 5) %}
+                                                <div class="media-cover media-cover-dark">
+                                                    <img src="/uploads/{{ images['gallery']['last'].getPath() }}" width="217" height="141" alt="{{ images['gallery']['last'].getTitle() }}"/>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li data-src="images/a837eb98_original.jpg" class="hide">
-                                        <img src="images/a837eb98_original.jpg" width="217" height="141"/>
-                                    </li>
-                                    <li data-src="images/a837eb98_original.jpg" class="hide">
-                                        <img src="images/a837eb98_original.jpg" width="217" height="141"/>
-                                    </li>
-                                    <li data-src="images/a837eb98_original.jpg" class="hide">
-                                        <img src="images/a837eb98_original.jpg" width="217" height="141"/>
-                                    </li>
+                                                <div class="row row-table row-full-height">
+                                                    <div class="col-12 col-middle text-center text-contrast">
+                                                        <div class="h5">
+                                                            See all {{ images['gallery']['count'] }} photos
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                                <img src="/uploads/{{ images['gallery']['last'].getPath() }}" width="217" height="141" alt="{{ images['gallery']['last'].getTitle() }}"/>
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
+                                    {% if(images['gallery']['other'] is not empty) %}
+                                        {% for image in images['gallery']['other']  %}
+                                            <li data-src="/uploads/{{ image.getPath() }}" class="hide">
+                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141" alt="{{ image.getTitle() }}"/>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -326,47 +307,25 @@
                             <div class="row">
                                 <div class="col-md-3 text-center">
                                     <a href="/" class="media-photo media-round">
-                                        <img alt="{{ container.get('user-name') }}" data-pin-nopin="true" height="90" src="images/original(1).jpg"
+                                        <img alt="{{ container.get('user-name') }}" data-pin-nopin="true" height="90" src="/uploads/{{ images['user']|first.getPath() }}"
                                              title="{{ container.get('user-name') }}" width="90">
                                     </a>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="expandable expandable-trigger-more space-2 expanded">
                                         <div class="expandable-content">
-                                            <p>{{ container.get('user-about-summary') }}</p>
+                                            {% autoescape false %}
+                                            {{ container.get('user-about-summary') }}
+                                            {% endautoescape %}
                                             <div class="expandable-indicator"></div>
                                         </div>
-                                        <a class="expandable-trigger-more"
-                                           href="https://www.airbnb.co.uk/rooms/6973482?checkin=02-07-2015&checkout=08-07-2015&s=HBEZ#">
-                                            <strong>+ More</strong>
-                                        </a>
-
                                     </div>
+                                    {% autoescape false %}
                                     {{ container.get('urser-about-statistics') }}
+                                    {% endautoescape %}
                                 </div>
                             </div>
                             <hr class="space-4 space-top-4">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="text-muted">
-                                        Trust
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="row row-condensed">
-                                        <div class="col-sm-4 col-md-3">
-                                            <a class="link-reset" rel="nofollow" href="/">
-                                                <div class="text-center text-wrap">
-                                                    <div class="badge-pill h3">
-                                                        <span class="badge-pill-count">16</span>
-                                                    </div>
-                                                    <div class="row-space-top-1">Reviews</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
