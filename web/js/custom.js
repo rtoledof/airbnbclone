@@ -79,6 +79,11 @@ $(function() {
     $(".icon-remove").click(function(){
         $(this).closest("li.removable").remove();
     });
+
+    $("a.expandable-trigger-more").click(function(){
+        $(this).closest(".expandable").addClass('expandable-trigger-more expanded');
+        return false;
+    });
 });
 
 

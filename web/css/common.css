@@ -9332,3 +9332,7 @@ body {
 a .icon-remove:hover{
     text-decoration: none;
 }
+
+div#new_translate_button_wrapper{
+    display: none;
+}
