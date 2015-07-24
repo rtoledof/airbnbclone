@@ -70,7 +70,7 @@
                     <div class="col-lg-4">
                         <form accept-charset="UTF-8" action="/" id="book_it_form" method="post">
                             <div style="margin:0;padding:0;display:inline">
-                                <input name="price" type="hidden" value="£250">
+                                <input name="price" type="hidden" value="{{ container.get('priceNight') }}">
                                 <input name="authenticity_token" type="hidden" value="">
                             </div>
                             <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
@@ -155,11 +155,13 @@
                                                             <td>
                                                                 Nights count
                                                             </td>
-                                                            <td id="night_count_cell">4</td>
+                                                            <td id="night_count_cell">
+                                                                {{ bookingCalc['nights_count'] }}
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Total</td>
-                                                            <td id="total_cell">£1200</td>
+                                                            <td id="total_cell">{{ bookingCalc['total'] }}</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>
