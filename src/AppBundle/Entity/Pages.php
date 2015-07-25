@@ -63,6 +63,13 @@ class Pages
      */
     private $sourceUrl;
 
+    /**
+     * @var string
+     * @ORM\Column(name="price", type="string", length=255, unique=false)
+     */
+    private $price;
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -201,5 +208,28 @@ class Pages
     public function getSourceUrl()
     {
         return $this->sourceUrl;
+    }
+
+    /**
+     * Set price
+     *
+     * @param string $price
+     * @return Pages
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return string 
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }

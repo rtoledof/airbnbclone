@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ManageController extends Controller
 {
     /**
-     * @Route("/manage/add")
+     * @Route("/manage/add", name="addPage")
      * @Template()
      * @param Request $request
      * @throws \Exception
@@ -60,7 +60,7 @@ class ManageController extends Controller
             $parser = new HtmlParser();
             $response = $parser->parse($response);
             $page->setRawdata($response);
-
+            $page->setPrice($response['priceNight']);
             $em = $this->getDoctrine()->getManager();
             $ds = DIRECTORY_SEPARATOR;
             $uploadPath = $this->get('kernel')->getRootDir() . $ds . '..' . $ds . 'web' . $ds . 'uploads' . $ds;

@@ -9322,7 +9322,7 @@ body {
     margin: 0 0 100px; /* bottom = footer height */
 }
 
-.errors ul{
+.errors ul, ul.err{
     list-style: none;
     color:#ff5a5f;
     margin:0;

@@ -1,50 +1,69 @@
-$(function() {
+$(function () {
     var now = new Date();
-    $( ".ui-datepicker-target" ).datepicker({
-        dateFormat: "dd-mm-yy",
+    $(".ui-datepicker-target").datepicker({
+        dateFormat: "yy-mm-dd",
         currentText: "Now",
         minDate: now,
         prevText: "",
         nextText: ""
     });
-    var checkoutSelector =  $("#checkout");
+    var checkoutSelector = $("#checkout");
     var checkinSelector = $("#checkin");
     var numberOfGuestsSelector = $("#number_of_guests");
+    var priceInputSelector = $('input[name="booking-price"]');
+    var formCheckoutDateElement = $('input[name="booking-checkout-date"]');
+    var formCheckinDateElement = $('input[name="booking-checkin-date"]');
+    var formGuestsElement = $('input[name="booking-guests"]');
     var currCheckinValue;
     var currCheckoutValue;
     checkinSelector
-        .datepicker('setDate', now)
-        .change(function(){
+        .change(function () {
             currCheckinValue = checkinSelector.datepicker("getDate");
             currCheckoutValue = checkoutSelector.datepicker("getDate");
-            if(currCheckoutValue - currCheckinValue < 0){
+            if (currCheckoutValue - currCheckinValue < 0) {
                 currCheckinValue.setDate(currCheckinValue.getDate() + 1);
                 checkoutSelector.datepicker('setDate', currCheckinValue);
             }
-            calculatePrice(checkinSelector.datepicker("getDate"), checkoutSelector.datepicker("getDate"), numberOfGuestsSelector.val());
+            calculatePrice(
+                checkinSelector.datepicker("getDate"),
+                checkoutSelector.datepicker("getDate"),
+                numberOfGuestsSelector.val(),
+                priceInputSelector.val()
+            );
+            formCheckinDateElement.val($.datepicker.formatDate('yy-mm-dd', checkinSelector.datepicker("getDate")));
         })
     ;
     checkoutSelector
-        .datepicker('setDate', "+1d")
-        .change(function(){
+        .change(function () {
             currCheckinValue = checkinSelector.datepicker("getDate");
             currCheckoutValue = checkoutSelector.datepicker("getDate");
-            if(currCheckoutValue - currCheckinValue < 0){
+            if (currCheckoutValue - currCheckinValue < 0) {
                 currCheckoutValue.setDate(currCheckoutValue.getDate() - 1);
                 checkinSelector.datepicker('setDate', currCheckoutValue);
             }
-            calculatePrice(checkinSelector.datepicker("getDate"), checkoutSelector.datepicker("getDate"), numberOfGuestsSelector.val());
+            calculatePrice(
+                checkinSelector.datepicker("getDate"),
+                checkoutSelector.datepicker("getDate"),
+                numberOfGuestsSelector.val(),
+                priceInputSelector.val()
+            );
+            formCheckoutDateElement.val($.datepicker.formatDate('yy-mm-dd', checkoutSelector.datepicker("getDate")));
         })
     ;
 
-    numberOfGuestsSelector.change(function(){
-            calculatePrice(checkinSelector.datepicker("getDate"), checkoutSelector.datepicker("getDate"), numberOfGuestsSelector.val());
+    numberOfGuestsSelector.change(function () {
+            calculatePrice(
+                checkinSelector.datepicker("getDate"),
+                checkoutSelector.datepicker("getDate"),
+                numberOfGuestsSelector.val(),
+                priceInputSelector.val()
+            );
+            formGuestsElement.val(numberOfGuestsSelector.val());
         }
     );
 
-    $(document).mouseup(function (e)
-    {
-        if(!$(".modal.show").length){
+    $(document).mouseup(function (e) {
+        if (!$(".modal.show").length) {
             return;
         }
         var container = $(".panel-padding.panel-body");
@@ -56,7 +75,7 @@ $(function() {
         }
     });
 
-    $("#start-booking").click(function(e){
+    $("#start-booking").click(function (e) {
         $(".modal").removeClass("hide").addClass("show");
         e.preventDefault();
     });
@@ -72,52 +91,101 @@ $(function() {
         animateThumb: false
     });
 
-    $("#submit_location").click(function(){
+    $("#submit_location").click(function () {
         $(".searchbar__input-wrapper").addClass("loading");
     });
 
-    $(".icon-remove").click(function(){
+    $(".icon-remove").click(function () {
         $(this).closest("li.removable").remove();
     });
 
-    $("a.expandable-trigger-more").click(function(){
+    $("a.expandable-trigger-more").click(function () {
         $(this).closest(".expandable").addClass('expandable-trigger-more expanded');
         return false;
     });
 });
 
 
-function calculatePrice(checkinDate, checkoutDate, guestsCount)
-{
+function calculatePrice(checkinDate, checkoutDate, guestsCount, price) {
     $(".js-book-it-status").addClass('loading');
-    sendToCalculator(checkinDate, checkoutDate, guestsCount, parseResult);
-
+    sendToCalculator(checkinDate, checkoutDate, guestsCount, price, showResult);
 }
 
-function parseResult(result){
-    $(".js-book-it-status").removeClass('loading');
+function showResult(result) {
     $("#price_night_cell").text(result.pricePerNight);
+    $('input[name="booking-price"]').val(result.pricePerNight);
     $("#night_count_cell").text(result.nightsCount);
     $("#total_cell").text(result.total);
 }
 
-function sendToCalculator(checkinDate, checkoutDate, guestsCount, callBackResult)
-{
-    if(!checkinDate instanceof Date){
-        throw "Check in date has a wrong format";
+function addCalculationError(errorText) {
+    var errorsContainer = $(".js-book-it-status").find('ul.err');
+    if (errorsContainer.length) {
+        errorsContainer.append('<li>' + errorText + '</li>');
     }
-    if(!checkoutDate instanceof Date){
-        throw "Check out date has a wrong format";
+}
+
+function prepareCalculationErrorsBlock() {
+    var bookingContainer = $(".js-book-it-status");
+    var bookingFormSelector = bookingContainer.find(".js-book-it-enabled:visible");
+    if (bookingFormSelector.length) {
+        bookingFormSelector.addClass('hide');
     }
-    if(isNaN(parseInt(guestsCount) ) || !parseInt(guestsCount)){
+    var errorsContainer = bookingContainer.find('ul.err');
+    if (!errorsContainer.length) {
+        errorsContainer = $('<ul class="err"></ul>');
+        bookingContainer.append(errorsContainer);
+    }
+}
+
+function showCalculationForm() {
+    var bookingContainer = $(".js-book-it-status");
+    var bookingFormSelector = bookingContainer.find(".js-book-it-enabled");
+    if (bookingFormSelector.length && !bookingFormSelector.is("visible")) {
+        bookingFormSelector.show();
+    }
+}
+
+function removeCalculationErrors() {
+    var errorsContainer = $(".js-book-it-status").find('ul.err');
+    if (errorsContainer.length) {
+        errorsContainer.remove();
+    }
+}
+
+function sendToCalculator(checkinDate, checkoutDate, guestsCount, price, callBackResult) {
+    removeCalculationErrors();
+    var msg = '';
+    if (!checkinDate instanceof Date) {
+        msg = "Check in date has a wrong format";
+        prepareCalculationErrorsBlock();
+        addCalculationError(msg);
+        throw msg;
+    }
+    if (!checkoutDate instanceof Date) {
+        msg = "Check out date has a wrong format";
+        prepareCalculationErrorsBlock();
+        addCalculationError(msg);
+        throw msg;
+    }
+    if (isNaN(parseInt(guestsCount)) || !parseInt(guestsCount)) {
         guestsCount = 1;
     }
-    setTimeout(function(){
-        callBackResult({
-            "pricePerNight": "€45",
-            "nightsCount": "3",
-            "total": "€135"
-        });
-    }, 2000);
+    var checkinDateString = $.datepicker.formatDate('yy-mm-dd', checkinDate);
+    var checkoutDateString = $.datepicker.formatDate('yy-mm-dd', checkoutDate);
+    var calcUrl = "/calculate/" + guestsCount + "/" + checkinDateString + "/" + checkoutDateString + "/" + price;
+    $.getJSON(calcUrl, function (data) {
+        $(".js-book-it-status").removeClass('loading');
+        if (data.errors) {
+            prepareCalculationErrorsBlock();
+            for (var index = 0; index < data.errors.length; ++index) {
+                addCalculationError(data.errors[index]);
+            }
+        }
+        else {
+            showCalculationForm();
+            callBackResult(data);
+        }
+    });
 
 }
