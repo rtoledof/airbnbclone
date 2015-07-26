@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Images;
+use AppBundle\Parser\DataContainer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -76,6 +77,11 @@ class Pages
      */
     private $price;
 
+    /**
+     * @var DataContainer
+     */
+    private $rawContainer;
+
 
     public function __construct()
     {
@@ -125,7 +131,6 @@ class Pages
     public function setRawdata($rawdata)
     {
         $this->rawdata = $rawdata;
-
         return $this;
     }
 
@@ -267,10 +272,27 @@ class Pages
     /**
      * Get bookings
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getBookings()
     {
         return $this->bookings;
+    }
+
+    /**
+     * @param string $key
+     * @param null|mixed $default
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getRawValue($key, $default = null){
+        if(!$this->rawContainer){
+            $rawData = $this->getRawdata();
+            if(is_string($rawData)){
+                $rawData = json_decode($rawData, true);
+            }
+            $this->rawContainer = new DataContainer($rawData);
+        }
+        return $this->rawContainer->get($key, $default);
     }
 }

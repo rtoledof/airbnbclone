@@ -1,24 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="subnav hide-print">
-        <div class="page-container-responsive">
-            <ul class="subnav-list">
-                <li>
-                    <a href="/manage/add" aria-selected="true" class="subnav-item">Add new page</a>
-                </li>
-                <li>
-                    <a href="/bookings" aria-selected="false" class="subnav-item">See bookings</a>
-                </li>
-                <li>
-                    <a href="/pages" aria-selected="false" class="subnav-item">See added pages</a>
-                </li>
-                <li>
-                    <a href="/page/random" aria-selected="false" class="subnav-item">Jump to a random page</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    {{ include('manage/admin-menu.html.twig', { 'curr': '/manage/add' }) }}
     <div class="row">
         <div id="discovery-container">
             <div class="discovery-section page-container-responsive page-container-no-padding row-space-6"

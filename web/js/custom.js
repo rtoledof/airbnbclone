@@ -104,33 +104,62 @@ $(function () {
         return false;
     });
 
-    $('#add_booking').ajaxForm({
-        'beforeSubmit': function (formData, jqForm, options) {
-            $('#appbundle_booking_submit').blur();
-            cleanupValidationFormErrors('#add_booking');
-        },
-        'error': function(){
-            addErrorToForm("Booking has failed because of an unknown reason", "#appbundle_booking_checkinDate");
-        },
-        'success': function (responseText, statusText, xhr, $form) {
-            if(xhr.status != 200){
+    var bookingForm = $('#add_booking');
+    if (bookingForm.length) {
+        bookingForm.ajaxForm({
+            'beforeSubmit': function (formData, jqForm, options) {
+                $('#appbundle_booking_submit').blur();
+                cleanupValidationFormErrors('#add_booking');
+            },
+            'error': function () {
                 addErrorToForm("Booking has failed because of an unknown reason", "#appbundle_booking_checkinDate");
-            }
-            if(responseText.success){
-                $("#booking-form-modal").removeClass("show").addClass("hide");
-                return;
-            }
-            if(responseText.errors){
-                var errors = responseText.errors;
-                for (var fieldSelector in errors) {
-                    if(errors.hasOwnProperty(fieldSelector)){
-                        addErrorToForm(errors[fieldSelector], "#appbundle_booking_" + fieldSelector);
+            },
+            'success': function (responseText, statusText, xhr, $form) {
+                if (xhr.status != 200) {
+                    addErrorToForm("Booking has failed because of an unknown reason", "#appbundle_booking_checkinDate");
+                }
+                if (responseText.success) {
+                    $("#booking-form-modal").removeClass("show").addClass("hide");
+                    showFlash('You\'ve successfully booked this room');
+                    cleanupForm("#add_booking");
+                    return;
+                }
+                if (responseText.errors) {
+                    var errors = responseText.errors;
+                    for (var fieldSelector in errors) {
+                        if (errors.hasOwnProperty(fieldSelector)) {
+                            addErrorToForm(errors[fieldSelector], "#appbundle_booking_" + fieldSelector);
+                        }
                     }
                 }
             }
-        }
+        });
+    }
+
+    $('.alert-close').click(function () {
+        hideFlash();
     });
+
 });
+
+function cleanupForm(formSelector)
+{
+    if($(formSelector).length){
+        $(formSelector).find('input').val('');
+    }
+}
+
+function hideFlash() {
+    $(".flash-container").hide().find("#flash-text-block").text('');
+}
+
+function showFlash(message) {
+    var flashBlock = $('.flash-container');
+    flashBlock.find('#flash-text-block').text(message);
+    flashBlock.removeClass('hide');
+    flashBlock.slideToggle(500);
+    setTimeout(hideFlash, 3000);
+}
 
 function calculatePrice(checkinDate, checkoutDate, guestsCount, price) {
     $(".js-book-it-status").addClass('loading');

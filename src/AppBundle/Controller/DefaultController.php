@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Booking\BookingValidatorChainBuilder;
 use AppBundle\Booking\Calculator;
+use AppBundle\Booking\PriceValidator;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\CalculationContext;
 use AppBundle\Entity\ImagesViewCollector;
@@ -58,8 +59,7 @@ class DefaultController extends Controller
         $bookingEntity = new Booking();
         $calculator = new Calculator();
         $context = new CalculationContext();
-        $container = new DataContainer($page->getRawdata());
-        $context->setPricePerNight($container->get('priceNight'));
+        $context->setPricePerNight($page->getRawValue('priceNight'));
         $now = new \DateTime();
         $context->setCheckInDate($now->format('Y-m-d'));
         $context->setCheckOutDate($now->modify('+1 day')->format('Y-m-d'));
@@ -74,12 +74,8 @@ class DefaultController extends Controller
         $form = $this->createForm(new BookingForm('/add-booking/' . $page->getId()), $bookingEntity);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-
-        }
         return $this->render('default/index.html.twig', array(
             'page' => $page,
-            'container' => $container,
             'images' => $imagesCollector->collect($page),
             'bookingCalc' => $calcResult,
             'form' => $form->createView(),
@@ -118,6 +114,9 @@ class DefaultController extends Controller
      */
     public function addBookingAction($pageId, Request $request)
     {
+        /**
+         * @var Pages $page
+         */
         $page = $this->getDoctrine()
             ->getRepository('AppBundle:Pages')
             ->find($pageId);
@@ -139,15 +138,20 @@ class DefaultController extends Controller
         $validatorChain = $validatorBuilder->buildChain();
 
         $values = $request->request->all();
+        $bookingEntity->setPriceString($page->getPrice());
         if (isset($values['appbundle_booking'])) {
             $values = $values['appbundle_booking'];
         } else {
             $values = array();
         }
+        $values['priceString'] = $page->getPrice();
         if ($validatorChain->validateContext($values) === null) {
             $calculator = new Calculator();
             $calcRequest = new CalculationContext();
-            $calcRequest->setFromBookingEntity($bookingEntity);
+            $calcRequest->setPricePerNight($values['priceString']);
+            $calcRequest->setGuestsCount($values['guestsCount']);
+            $calcRequest->setCheckOutDate($values['checkoutDate']);
+            $calcRequest->setCheckInDate($values['checkinDate']);
             $calcResult = $calculator->calculate($calcRequest);
             $bookingEntity->setNightsCount($calcResult['nightsCount']);
             $bookingEntity->setTotal($calcResult['total']);

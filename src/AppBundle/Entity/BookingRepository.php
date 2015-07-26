@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * BookingRepository
@@ -12,4 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookingRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
+    public function getExportQuery()
+    {
+        return $this->getEntityManager()->createQuery("SELECT b FROM AppBundle:Booking b ORDER BY b.checkinDate");
+    }
 }

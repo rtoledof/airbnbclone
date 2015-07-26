@@ -143,6 +143,11 @@ class Booking
     protected $page;
 
     /**
+     * @var string
+     */
+    private $host;
+
+    /**
      * Get id
      *
      * @return integer
@@ -162,8 +167,7 @@ class Booking
     {
         if (is_string($checkinDate)) {
             $dateTime = \DateTime::createFromFormat('Y-m-d', $checkinDate);
-        }
-        else{
+        } else {
             $dateTime = $checkinDate;
         }
         $this->checkinDate = $dateTime;
@@ -191,8 +195,7 @@ class Booking
     {
         if (is_string($checkoutDate)) {
             $dateTime = \DateTime::createFromFormat('Y-m-d', $checkoutDate);
-        }
-        else{
+        } else {
             $dateTime = $checkoutDate;
         }
         $this->checkoutDate = $dateTime;
@@ -528,7 +531,7 @@ class Booking
     /**
      * Get pageId
      *
-     * @return integer 
+     * @return integer
      */
     public function getPageId()
     {
@@ -556,5 +559,55 @@ class Booking
     public function getPage()
     {
         return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserDataAsString()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName() . ', ' . $this->getEmail() . ' ' .
+        $this->getPhone() . ' ' . $this->getAddress() . ' ' . $this->getCity() . ' ' . $this->getZip() . ' ' .
+        $this->getCountry();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array(
+            'checkin_date' => $this->getCheckinDate()->format('Y-m-d'),
+            'checkout_date' => $this->getCheckoutDate()->format('Y-m-d'),
+            'guests_count' => $this->getGuestsCount(),
+            'price' => $this->getPriceString(),
+            'nights_count' => $this->getNightsCount(),
+            'total' => $this->getTotal(),
+            'first_name' => $this->getFirstName(),
+            'last_name' => $this->getLastName(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'address' => $this->getAddress(),
+            'city' => $this->getCity(),
+            'zip' => $this->getZip(),
+            'country' => $this->getCountry(),
+            'page_url' => $this->getHost() . '/rooms/' . $this->getPageId()
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * @param string $host
+     */
+    public function setHost($host)
+    {
+        $this->host = $host;
     }
 }

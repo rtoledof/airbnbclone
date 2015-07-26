@@ -1,0 +1,25 @@
+{% set menu=[
+    {'url': '/manage/add', 'title': 'Add new page'},
+    {'url': '/manage/bookings', 'title': 'See bookings'},
+    {'url': '/manage/pages', 'title': 'See pages'},
+    {'url': '/rooms/random', 'title':'Jump to a random page'}
+]
+%}
+<div class="subnav hide-print">
+    <div class="page-container-responsive">
+        <ul class="subnav-list">
+            {% for values in menu %}
+                {% set url = values.url %}
+                {% set active="false" %}
+                {% if url==curr %}
+                    {% set active="true" %}
+                {% endif %}
+                <li>
+                    <a href="{{ url }}" aria-selected="{{ active }}" class="subnav-item">
+                        {{ values.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

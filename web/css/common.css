@@ -9343,3 +9343,7 @@ div#new_translate_button_wrapper{
     background-color: #fff8e5;
 }
 
+#transaction-history .export-csv-link-container {
+    margin: -10px 0 10px 0;
+    text-align: right;
+}

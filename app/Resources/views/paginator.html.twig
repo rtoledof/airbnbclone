@@ -1,0 +1,27 @@
+{% if paginator.getPagesCount() > 1 %}
+<div class="pagination pagination-right">
+    <ul>
+        {% if paginator.hasPrevPage() %}
+            <li>
+                <a class="previous_page" href="{{ paginator.getUrl() + '/' + paginator.getPrevPage() }}">«</a>
+            </li>
+        {% endif %}
+        {% for i in 1..paginator.getPagesCount() %}
+            {% set class = '' %}
+            {% if i == paginator.getCurrentPage() %}
+                {% set class = 'active' %}
+            {% endif %}
+            <li class="{{ class }}">
+                <a href="{{ paginator.getUrl() + '/' + i }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+        {% if paginator.hasNextPage() %}
+            <li>
+                <a class="next_page" href="{{ paginator.getUrl() + '/' + paginator.getNextPage() }}">»</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}

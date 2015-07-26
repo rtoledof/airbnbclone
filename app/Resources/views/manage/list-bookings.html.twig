@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('manage/admin-menu.html.twig', { 'curr': '/manage/bookings' }) }}
+    <div class="page-container-responsive row-space-top-4 row-space-4">
+        <div class="row">
+            <div class="col-md-14">
+                <div id="transaction-history" class="panel">
+                    <div class="panel-header">
+                        Bookings listing
+                    </div>
+                    <div id="completed-transactions" class="panel-body tab-panel transaction-tab" role="tabpanel"
+                         aria-hidden="false">
+                        <div class="row">
+                            <div class="col-7"></div>
+                            <div class="col-5 export-csv-link-container">
+                                <a href="/manage/export-bookings" class="export-csv-link">
+                                    Export to CSV
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <table class="table transaction-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Checkin</th>
+                                            <th>Checkout</th>
+                                            <th>Guests</th>
+                                            <th>Price</th>
+                                            <th>Nights</th>
+                                            <th>Total</th>
+                                            <th>Page</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in bookings.getData() %}
+                                        <tr>
+                                            <td>{{ booking.getUserDataAsString() }}</td>
+                                            <td>{{ booking.getCheckinDate().format('Y-m-d') }}</td>
+                                            <td>{{ booking.getCheckoutDate().format('Y-m-d') }}</td>
+                                            <td>{{ booking.getGuestsCount() }}</td>
+                                            <td>{{ booking.getPriceString() }}</td>
+                                            <td>{{ booking.getNightsCount() }}</td>
+                                            <td>{{ booking.getTotal() }}</td>
+                                            <td><a href="/rooms/{{ booking.getPageId() }}">Page</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {{ include('paginator.html.twig', { 'paginator': bookings }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
