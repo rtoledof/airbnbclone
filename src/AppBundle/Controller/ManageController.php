@@ -6,6 +6,7 @@ use AppBundle\Entity\ImagesGenerator;
 use AppBundle\Entity\ImageFactory;
 use AppBundle\Entity\Pages;
 use AppBundle\Entity\RequestUrl;
+use AppBundle\Form\AddForm;
 use AppBundle\Parser\HtmlParser;
 use AppBundle\Parser\RemoteDataCollector;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,30 +29,8 @@ class ManageController extends Controller
         $page = new Pages();
         $page->setVersion('1.0');
         $page->setDate(new \DateTime());
-        $form = $this
-            ->createFormBuilder($page, array('attr' => array('id' => 'searchbar-form'), 'method' => 'POST'))
-            ->add('sourceUrl', 'text', array(
-                    'attr' =>
-                        array(
-                            'class' => 'menu-autocomplete-input form-inline location input-large input-contrast',
-                            'placeholder' => 'Please enter a source url',
-                            'id' => 'url',
-                            'autocomplete' => 'off',
-                        ),
-                    'required' => true
-                )
-            )
-            ->add(
-                'submit_location',
-                'submit',
-                array(
-                    'attr' => array(
-                        'class' => 'searchbar__submit btn btn-primary btn-large'
-                    ),
-                    'label' => 'Save'
-                )
-            )
-            ->getForm();
+
+        $form = $this->createForm(new AddForm(), $page);
         $form->handleRequest($request);
         $resultUl = null;
         if ($form->isSubmitted() && $form->isValid()) {

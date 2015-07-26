@@ -99,5 +99,23 @@ class CalculationContext
         return $this;
     }
 
+    /**
+     * @param Booking $bookingEntity
+     */
+    public function setFromBookingEntity(Booking $bookingEntity)
+    {
+        $checkinDate = $bookingEntity->getCheckinDate();
+        if ($checkinDate instanceof \DateTime) {
+            $checkintDate = $checkinDate->format('Y-m-d');
+            $this->setCheckInDate($checkintDate);
+        }
+        $checkoutDate = $bookingEntity->getCheckoutDate();
+        if ($checkoutDate instanceof \DateTime) {
+            $checkoutDate = $checkoutDate->format('Y-m-d');
+            $this->setCheckOutDate($checkoutDate);
+        }
+        $this->setGuestsCount($bookingEntity->getGuestsCount());
+        $this->setPricePerNight($bookingEntity->getPriceString());
+    }
 
 }

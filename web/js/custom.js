@@ -10,10 +10,10 @@ $(function () {
     var checkoutSelector = $("#checkout");
     var checkinSelector = $("#checkin");
     var numberOfGuestsSelector = $("#number_of_guests");
-    var priceInputSelector = $('input[name="booking-price"]');
-    var formCheckoutDateElement = $('input[name="booking-checkout-date"]');
-    var formCheckinDateElement = $('input[name="booking-checkin-date"]');
-    var formGuestsElement = $('input[name="booking-guests"]');
+    var priceInputSelector = $('#appbundle_booking_priceString');
+    var formCheckoutDateElement = $('#appbundle_booking_checkoutDate');
+    var formCheckinDateElement = $('#appbundle_booking_checkinDate');
+    var formGuestsElement = $('#appbundle_booking_guestsCount');
     var currCheckinValue;
     var currCheckoutValue;
     checkinSelector
@@ -76,7 +76,7 @@ $(function () {
     });
 
     $("#start-booking").click(function (e) {
-        $(".modal").removeClass("hide").addClass("show");
+        $("#booking-form-modal").removeClass("hide").addClass("show");
         e.preventDefault();
     });
 
@@ -103,8 +103,34 @@ $(function () {
         $(this).closest(".expandable").addClass('expandable-trigger-more expanded');
         return false;
     });
-});
 
+    $('#add_booking').ajaxForm({
+        'beforeSubmit': function (formData, jqForm, options) {
+            $('#appbundle_booking_submit').blur();
+            cleanupValidationFormErrors('#add_booking');
+        },
+        'error': function(){
+            addErrorToForm("Booking has failed because of an unknown reason", "#appbundle_booking_checkinDate");
+        },
+        'success': function (responseText, statusText, xhr, $form) {
+            if(xhr.status != 200){
+                addErrorToForm("Booking has failed because of an unknown reason", "#appbundle_booking_checkinDate");
+            }
+            if(responseText.success){
+                $("#booking-form-modal").removeClass("show").addClass("hide");
+                return;
+            }
+            if(responseText.errors){
+                var errors = responseText.errors;
+                for (var fieldSelector in errors) {
+                    if(errors.hasOwnProperty(fieldSelector)){
+                        addErrorToForm(errors[fieldSelector], "#appbundle_booking_" + fieldSelector);
+                    }
+                }
+            }
+        }
+    });
+});
 
 function calculatePrice(checkinDate, checkoutDate, guestsCount, price) {
     $(".js-book-it-status").addClass('loading');
@@ -113,7 +139,7 @@ function calculatePrice(checkinDate, checkoutDate, guestsCount, price) {
 
 function showResult(result) {
     $("#price_night_cell").text(result.pricePerNight);
-    $('input[name="booking-price"]').val(result.pricePerNight);
+    $('#appbundle_booking_priceString').val(result.pricePerNight);
     $("#night_count_cell").text(result.nightsCount);
     $("#total_cell").text(result.total);
 }
@@ -187,5 +213,22 @@ function sendToCalculator(checkinDate, checkoutDate, guestsCount, price, callBac
             callBackResult(data);
         }
     });
+}
 
+function addErrorToForm(errorText, selector) {
+    if (!$(selector).length) {
+        selector = '#appbundle_booking_checkinDate';
+    }
+    var errorContainer = '<div class="label label-warning inline-error">' + errorText + '</div>';
+    $(errorContainer).insertBefore($(selector).parent(), null);
+    $(selector).addClass('invalid');
+    return true;
+}
+
+function cleanupValidationFormErrors(formSelector) {
+    if (!$(formSelector).length) {
+        return false;
+    }
+    $(formSelector).find('.inline-error').remove();
+    $(formSelector).find('.invalid').removeClass('invalid');
 }

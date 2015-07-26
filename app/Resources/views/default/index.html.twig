@@ -1,270 +1,289 @@
+{% extends 'base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
+{% endblock %}
 {% block title %}
     {{ container.get('page-title') }}
 {% endblock %}
-{% extends 'base.html.twig' %}
 
 {% block body %}
     <div id="room" itemscope="" itemtype="http://schema.org/Product">
-        {% if images['background'] is not empty %}
+    {% if images['background'] is not empty %}
         <div id="photos" class="with-photos with-modal">
             <span class="cover-img-container" data-hook="cover-img-container">
-              <div class="cover-img show-sm" data-hook="img-sm" style="background-image: url(/uploads/{{ images['background']|first.getPath() }});">
+              <div class="cover-img show-sm" data-hook="img-sm"
+                   style="background-image: url(/uploads/{{ images['background']|first.getPath() }});">
               </div>
-              <div class="cover-img hide-sm" data-hook="img -lg" style="background-image: url(/uploads/{{ images['background']|first.getPath() }})">
+              <div class="cover-img hide-sm" data-hook="img -lg"
+                   style="background-image: url(/uploads/{{ images['background']|first.getPath() }})">
               </div>
             </span>
         </div>
-        {% endif %}
-        <div id="summary" class="panel room-section">
-            <div class="page-container-responsive">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="row-space-4 row-space-top-4">
-                            <div class="row">
-                                <div class="col-md-3 space-sm-4 text-center space-sm-2">
-                                    <div class="media-photo-badge">
-                                        <a href="#" class="media-photo media-round">
-                                            <img alt="User Profile Image" class="host-profile-image"
-                                                 data-pin-nopin="true" height="115" src="/uploads/{{ images['user']|first.getPath() }}"
-                                                 title="{{ container.get('user-name') }}" width="115">
-                                        </a>
+    {% endif %}
+    <div id="summary" class="panel room-section">
+    <div class="page-container-responsive">
+    <div class="row">
+    <div class="col-lg-8">
+        <div class="row-space-4 row-space-top-4">
+            <div class="row">
+                <div class="col-md-3 space-sm-4 text-center space-sm-2">
+                    <div class="media-photo-badge">
+                        <a href="#" class="media-photo media-round">
+                            <img alt="User Profile Image" class="host-profile-image"
+                                 data-pin-nopin="true" height="115" src="/uploads/{{ images['user']|first.getPath() }}"
+                                 title="{{ container.get('user-name') }}" width="115">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <h1 itemprop="name" class="overflow h3 row-space-1 text-center-sm"
+                        id="listing_name">
+                        {{ container.get('title') }}
+                    </h1>
+
+                    <div id="display-address" class="row-space-2 text-muted text-center-sm"
+                         data-location="{{ container.get('address') }}">
+                        <a href="#" class="link-reset">{{ container.get('address') }}</a>
+                    </div>
+                    <div class="row row-condensed text-muted text-center">
+                        {% for icon in container.get('room-detail-icons') %}
+                            <div class="col-sm-3">
+                                {% autoescape false %}
+                                {{ icon }}
+                                {% endautoescape %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-muted text-center hide-sm">
+                    <a href="#" class="link-reset text-wrap">{{ container.get('user-name') }}</a>
+                </div>
+                <div class="col-md-9">
+                    <div class="row row-condensed text-muted text-center">
+                        {% for title in container.get('room-detail-titles') %}
+                            <div class="col-sm-3">
+                                {{ title }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <form accept-charset="UTF-8" action="/" id="book_it_form" method="post">
+            <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                <div id="price_amount"
+                     class="book-it-price-amount pull-left h3 text-special">{{ container.get('priceNight') }}</div>
+                <i class="icon icon-bolt icon-beach pull-left h3 pricing__bolt"></i>
+
+                <div id="payment-period-container" class="pull-right">
+                    <div id="per_night" class="per-night">
+                        Per Night
+                    </div>
+                    <div id="per_month" class="per-month hide">
+                        Per Month
+                    </div>
+                </div>
+            </div>
+            <div id="book_it">
+                <div class="panel book-it-panel">
+                    <div class="panel-body panel-light">
+                        <div class="form-fields">
+                            <div class="row row-condensed space-3">
+                                <div class="col-md-9">
+                                    <div class="row row-condensed">
+                                        <div class="col-sm-6 space-1-sm">
+                                            <label for="checkin">
+                                                Check In
+                                            </label>
+                                            <input class="checkin ui-datepicker-target" id="checkin" name="checkin"
+                                                   placeholder="dd-mm-yyyy" type="text"
+                                                   value="{{ bookingCalc['checkinDate'] }}">
+                                        </div>
+                                        <div class="col-sm-6 space-1-sm">
+                                            <label for="checkout">
+                                                Check Out
+                                            </label>
+                                            <input class="checkout ui-datepicker-target" id="checkout" name="checkout"
+                                                   placeholder="dd-mm-yyyy" type="text"
+                                                   value="{{ bookingCalc['checkoutDate'] }}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <h1 itemprop="name" class="overflow h3 row-space-1 text-center-sm"
-                                        id="listing_name">
-                                        {{ container.get('title') }}
-                                    </h1>
+                                <div class="col-md-3">
+                                    <label for="number_of_guests">
+                                        Guests
+                                    </label>
 
-                                    <div id="display-address" class="row-space-2 text-muted text-center-sm"
-                                         data-location="{{ container.get('address') }}">
-                                        <a href="#" class="link-reset">{{ container.get('address') }}</a>
-                                    </div>
-                                    <div class="row row-condensed text-muted text-center">
-                                        {% for icon in container.get('room-detail-icons')  %}
-                                        <div class="col-sm-3">
-                                            {% autoescape false %}
-                                            {{ icon }}
-                                            {% endautoescape %}
-                                        </div>
-                                        {% endfor %}
+                                    <div class="select select-block">
+                                        <select id="number_of_guests" name="number_of_guests">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 text-muted text-center hide-sm">
-                                    <a href="#" class="link-reset text-wrap">{{ container.get('user-name') }}</a>
+
+                            <div class="simple-dates-message-container hide">
+                                <div class="media text-kazan space-top-2 space-2">
+                                    <div class="pull-left message-icon">
+                                        <i class="icon icon-currency-gbp"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <strong>
+                                            Enter dates for accurate prices and availability.
+                                        </strong>
+                                    </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <div class="row row-condensed text-muted text-center">
-                                        {% for title in container.get('room-detail-titles') %}
-                                        <div class="col-sm-3">
-                                            {{ title }}
+                            </div>
+                        </div>
+                        <div class="js-book-it-status">
+                            <div class="js-book-it-enabled clearfix">
+                                <div class="js-subtotal-container book-it__subtotal panel-padding-fit">
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                Price per night
+                                            </td>
+                                            <td id="price_night_cell">{{ container.get('priceNight') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Nights count
+                                            </td>
+                                            <td id="night_count_cell">
+                                                {{ bookingCalc['nightsCount'] }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td id="total_cell">{{ bookingCalc['total'] }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="js-book-it-btn-container">
+                                    <button type="button" class="js-book-it-btn btn btn-large btn-block btn-primary"
+                                            id="start-booking">
+                                                        <span class="book-it__btn-text">
+                                                          Book
+                                                        </span>
+                                    </button>
+                                </div>
+                                <p class="text-muted book-it__btn-text--instant-alt space-1 space-top-3 text-center">
+                                    <small>
+                                        You’ll be able to review before paying.
+                                    </small>
+                                </p>
+                            </div>
+
+                            <div id="book_it_disabled" class="text-center hide">
+                                <p id="book_it_disabled_message" class="icon-rausch">Please specify check in and check
+                                    out dates</p>
+                                <a href="" class="btn btn-large btn-block" id="view_other_listings_button">
+                                    View Other Listings
+                                </a>
+                            </div>
+                        </div>
+                        <div class="fancy-dates-message-container va-container va-container-h space-top-3 hide hide-sm">
+                            <div class="illustration-container va-middle">
+                                <div class="text">
+                                    <strong>
+                                        When are you travelling?
+                                    </strong><br>
+                                    Enter dates for accurate prices and availability.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="book-it-message-container hide">
+                            <hr>
+                            <div class="listing-desirability hide" data-behavior="occupancy_rate">
+                                <div class="icon-background-container icon-rare-find-background">
+                                    <div class="message-text">
+                                        <strong>This is a rare find.</strong>
+
+                                        <div class="media space-top-1">
+                                            Liz's place is usually booked.
                                         </div>
-                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listing-desirability hide" data-behavior="dated_views">
+                                <div class="icon-background-container icon-clock-background">
+                                    <div class="message-text">
+                                        <strong>Love this place? Book soon!</strong>
+
+                                        <div class="media space-top-1" data-behavior="dated_views_body">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <form accept-charset="UTF-8" action="/" id="book_it_form" method="post">
-                            <div id="pricing" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-                                <div id="price_amount" class="book-it-price-amount pull-left h3 text-special">{{ container.get('priceNight') }}</div>
-                                <i class="icon icon-bolt icon-beach pull-left h3 pricing__bolt"></i>
-
-                                <div id="payment-period-container" class="pull-right">
-                                    <div id="per_night" class="per-night">
-                                        Per Night
-                                    </div>
-                                    <div id="per_month" class="per-month hide">
-                                        Per Month
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="book_it">
-                                <div class="panel book-it-panel">
-                                    <div class="panel-body panel-light">
-                                        <div class="form-fields">
-                                            <div class="row row-condensed space-3">
-                                                <div class="col-md-9">
-                                                    <div class="row row-condensed">
-                                                        <div class="col-sm-6 space-1-sm">
-                                                            <label for="checkin">
-                                                                Check In
-                                                            </label>
-                                                            <input class="checkin ui-datepicker-target" id="checkin" name="checkin" placeholder="dd-mm-yyyy" type="text" value="{{ bookingCalc['checkinDate'] }}">
-                                                        </div>
-                                                        <div class="col-sm-6 space-1-sm">
-                                                            <label for="checkout">
-                                                                Check Out
-                                                            </label>
-                                                            <input class="checkout ui-datepicker-target" id="checkout" name="checkout" placeholder="dd-mm-yyyy" type="text" value="{{ bookingCalc['checkoutDate'] }}">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="number_of_guests">
-                                                        Guests
-                                                    </label>
-
-                                                    <div class="select select-block">
-                                                        <select id="number_of_guests" name="number_of_guests">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                            <option value="6">6</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="simple-dates-message-container hide">
-                                                <div class="media text-kazan space-top-2 space-2">
-                                                    <div class="pull-left message-icon">
-                                                        <i class="icon icon-currency-gbp"></i>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <strong>
-                                                            Enter dates for accurate prices and availability.
-                                                        </strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="js-book-it-status">
-                                            <div class="js-book-it-enabled clearfix">
-                                                <div class="js-subtotal-container book-it__subtotal panel-padding-fit">
-                                                    <table class="table table-bordered">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                Price per night
-                                                            </td>
-                                                            <td id="price_night_cell">{{ container.get('priceNight') }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                Nights count
-                                                            </td>
-                                                            <td id="night_count_cell">
-                                                                {{ bookingCalc['nightsCount'] }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Total</td>
-                                                            <td id="total_cell">{{ bookingCalc['total'] }}</td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="js-book-it-btn-container">
-                                                    <button type="button" class="js-book-it-btn btn btn-large btn-block btn-primary" id="start-booking">
-                                                        <span class="book-it__btn-text">
-                                                          Book
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <p class="text-muted book-it__btn-text--instant-alt space-1 space-top-3 text-center">
-                                                    <small>
-                                                        You’ll be able to review before paying.
-                                                    </small>
-                                                </p>
-                                            </div>
-
-                                            <div id="book_it_disabled" class="text-center hide">
-                                                <p id="book_it_disabled_message" class="icon-rausch">Please specify check in and check out dates</p>
-                                                <a href="" class="btn btn-large btn-block" id="view_other_listings_button">
-                                                    View Other Listings
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="fancy-dates-message-container va-container va-container-h space-top-3 hide hide-sm">
-                                            <div class="illustration-container va-middle">
-                                                <div class="text">
-                                                    <strong>
-                                                        When are you travelling?
-                                                    </strong><br>
-                                                    Enter dates for accurate prices and availability.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="book-it-message-container hide">
-                                            <hr>
-                                            <div class="listing-desirability hide" data-behavior="occupancy_rate">
-                                                <div class="icon-background-container icon-rare-find-background">
-                                                    <div class="message-text">
-                                                        <strong>This is a rare find.</strong>
-
-                                                        <div class="media space-top-1">
-                                                            Liz's place is usually booked.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="listing-desirability hide" data-behavior="dated_views">
-                                                <div class="icon-background-container icon-clock-background">
-                                                    <div class="message-text">
-                                                        <strong>Love this place? Book soon!</strong>
-
-                                                        <div class="media space-top-1" data-behavior="dated_views_body">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
 
-        <div id="details" class="details-section webkit-render-fix">
-            <div class="page-container-responsive">
-                <div class="row">
-                    <div class="col-lg-8" id="details-column">
-                        <div class="row-space-8 row-space-top-8">
-                            <h4 class="row-space-4 text-center-sm">
-                                {{ container.get('description-title') }}
-                            </h4>
-                            {% autoescape false %}
-                            {{ container.get('description-summary', '') }}
-                            {{ container.get('description-space') }}
-                            {{ container.get('description-amenities') }}
-                            {{ container.get('description-longtext') }}
-                            {{ container.get('description-house-rules') }}
-                            {{ container.get('description-safety') }}
-                            {% endautoescape %}
-                            <div class="js-p3-safety-features-section">
-                                <div class="row">
-                                    <hr>
-                                </div>
-                                {% if(images['gallery'] is not empty) %}
+    <div id="details" class="details-section webkit-render-fix">
+        <div class="page-container-responsive">
+            <div class="row">
+                <div class="col-lg-8" id="details-column">
+                    <div class="row-space-8 row-space-top-8">
+                        <h4 class="row-space-4 text-center-sm">
+                            {{ container.get('description-title') }}
+                        </h4>
+                        {% autoescape false %}
+                        {{ container.get('description-summary', '') }}
+                        {{ container.get('description-space') }}
+                        {{ container.get('description-amenities') }}
+                        {{ container.get('description-longtext') }}
+                        {{ container.get('description-house-rules') }}
+                        {{ container.get('description-safety') }}
+                        {% endautoescape %}
+                        <div class="js-p3-safety-features-section">
+                            <div class="row">
+                                <hr>
+                            </div>
+                            {% if(images['gallery'] is not empty) %}
                                 <ul id="lightGallery" class="photo-grid row-space-4 row-space-top-4">
                                     {% if(images['gallery']['featured'] is not empty) %}
-                                        {% for image in images['gallery']['featured']  %}
+                                        {% for image in images['gallery']['featured'] %}
                                             <li data-src="/uploads/{{ image.getPath() }}" class="col-6 featured-height">
-                                                <img src="/uploads/{{ image.getPath() }}" width="330" height="282" alt="{{ image.getTitle() }}"/>
+                                                <img src="/uploads/{{ image.getPath() }}" width="330" height="282"
+                                                     alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
                                     {% endif %}
                                     {% if(images['gallery']['supporting'] is not empty) %}
-                                        {% for image in images['gallery']['supporting']  %}
-                                            <li data-src="/uploads/{{ image.getPath() }}" class="col-4 supporting-height">
-                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141" alt="{{ image.getTitle() }}"/>
+                                        {% for image in images['gallery']['supporting'] %}
+                                            <li data-src="/uploads/{{ image.getPath() }}"
+                                                class="col-4 supporting-height">
+                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141"
+                                                     alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
                                     {% endif %}
                                     {% if(images['gallery']['last'] is not empty) %}
-                                        <li data-src="/uploads/{{ images['gallery']['last'].getPath() }}" class="col-4 supporting-height">
+                                        <li data-src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                            class="col-4 supporting-height">
                                             {% if(images['gallery']['count'] > 5) %}
                                                 <div class="media-cover media-cover-dark">
-                                                    <img src="/uploads/{{ images['gallery']['last'].getPath() }}" width="217" height="141" alt="{{ images['gallery']['last'].getTitle() }}"/>
+                                                    <img src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                                         width="217" height="141"
+                                                         alt="{{ images['gallery']['last'].getTitle() }}"/>
                                                 </div>
                                                 <div class="row row-table row-full-height">
                                                     <div class="col-12 col-middle text-center text-contrast">
@@ -274,118 +293,110 @@
                                                     </div>
                                                 </div>
                                             {% else %}
-                                                <img src="/uploads/{{ images['gallery']['last'].getPath() }}" width="217" height="141" alt="{{ images['gallery']['last'].getTitle() }}"/>
+                                                <img src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                                     width="217" height="141"
+                                                     alt="{{ images['gallery']['last'].getTitle() }}"/>
                                             {% endif %}
                                         </li>
                                     {% endif %}
                                     {% if(images['gallery']['other'] is not empty) %}
-                                        {% for image in images['gallery']['other']  %}
+                                        {% for image in images['gallery']['other'] %}
                                             <li data-src="/uploads/{{ image.getPath() }}" class="hide">
-                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141" alt="{{ image.getTitle() }}"/>
+                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141"
+                                                     alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
                                     {% endif %}
                                 </ul>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="host-profile" class="room-section webkit-render-fix">
-                <div class="page-container-responsive space-top-8 space-8">
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <h4 class="row-space-4 text-center-sm">
-                                {{ container.get('user-about-title') }}
-                            </h4>
-
-                            <div class="row">
-                                <div class="col-md-3 text-center">
-                                    <a href="/" class="media-photo media-round">
-                                        <img alt="{{ container.get('user-name') }}" data-pin-nopin="true" height="90" src="/uploads/{{ images['user']|first.getPath() }}"
-                                             title="{{ container.get('user-name') }}" width="90">
-                                    </a>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="expandable expandable-trigger-more space-2 expanded">
-                                        <div class="expandable-content">
-                                            {% autoescape false %}
-                                            {{ container.get('user-about-summary') }}
-                                            {% endautoescape %}
-                                            <div class="expandable-indicator"></div>
-                                        </div>
-                                    </div>
-                                    {% autoescape false %}
-                                    {{ container.get('urser-about-statistics') }}
-                                    {% endautoescape %}
-                                </div>
-                            </div>
-                            <hr class="space-4 space-top-4">
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div id="host-profile" class="room-section webkit-render-fix">
+            <div class="page-container-responsive space-top-8 space-8">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h4 class="row-space-4 text-center-sm">
+                            {{ container.get('user-about-title') }}
+                        </h4>
+
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href="/" class="media-photo media-round">
+                                    <img alt="{{ container.get('user-name') }}" data-pin-nopin="true" height="90"
+                                         src="/uploads/{{ images['user']|first.getPath() }}"
+                                         title="{{ container.get('user-name') }}" width="90">
+                                </a>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="expandable expandable-trigger-more space-2 expanded">
+                                    <div class="expandable-content">
+                                        {% autoescape false %}
+                                        {{ container.get('user-about-summary') }}
+                                        {% endautoescape %}
+                                        <div class="expandable-indicator"></div>
+                                    </div>
+                                </div>
+                                {% autoescape false %}
+                                {{ container.get('urser-about-statistics') }}
+                                {% endautoescape %}
+                            </div>
+                        </div>
+                        <hr class="space-4 space-top-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
 {% endblock %}
-{% block modalForm%}
-    <div class="modal hide" role="dialog" aria-hidden="false" tabindex="-1">
+{% block modalForm %}
+    <div class="modal hide" role="dialog" aria-hidden="false" tabindex="-1" id="booking-form-modal">
         <div class="modal-table">
             <div class="modal-cell">
                 <div class="modal-content">
-                    <div class="alert alert-with-icon alert-error alert-header panel-header hidden-element notice"
-                         id="notice">
-                        <i class="icon alert-icon icon-alert-alt"></i>
-
-                    </div>
                     <div class="panel-padding panel-body">
                         <div class="text-center social-links">
                             Please enter your booking details
                             <hr>
                         </div>
-                        <form accept-charset="UTF-8" action="/create" class="signup-form" id="user_new" method="post">
-                            <div class="signup-form-fields">
-                                <input id="booking-checkin-date" name="booking-checkin-date" type="hidden" value="{{ bookingCalc['checkinDate'] }}"/>
-                                <input id="booking-checkout-date" name="booking-checkout-date" type="hidden" value="{{ bookingCalc['checkoutDate'] }}"/>
-                                <input id="booking-guests" name="booking-guests" type="hidden" value="{{ bookingCalc['guestsCount'] }}"/>
-                                <input id="booking-price" name="booking-price" type="hidden" value="{{ bookingCalc['pricePerNight'] }}"/>
-                                <div class="control-group row-space-1 invalid" id="inputFirst">
-                                    <label for="user[first_name]" generated="true" class="invalid">
-                                        First name is required.
-                                    </label>
-                                    <input type="text" name="user[first_name]" placeholder="First name" class="decorative-input invalid" value="">
-                                </div>
-
-                                <div class="control-group row-space-1" id="inputLast">
-                                    <input type="text" name="user[last_name]" placeholder="Last name" class="decorative-input inspectletIgnore" value="">
-                                </div>
-
-                                <div class="control-group row-space-1" id="inputEmail">
-                                    <input type="email" name="user[email]" placeholder="Email address" value="" class="decorative-input inspectletIgnore">
-
-                                </div>
-                                <div class="control-group row-space-1" id="inputAddress">
-                                    <input type="text" name="user[address]" placeholder="Address" value="" class="decorative-input inspectletIgnore">
-                                </div>
-                                <div class="control-group row-space-1" id="inputCity">
-                                    <input type="text" name="user[city]" placeholder="City" value="" class="decorative-input inspectletIgnore">
-                                </div>
-                                <div class="control-group row-space-1" id="inputZip">
-                                    <input type="text" name="user[zip]" placeholder="Postal code" value="" class="decorative-input inspectletIgnore">
-                                </div>
-                                <div class="control-group row-space-1" id="inputCountry">
-                                    <input type="text" name="user[country]" placeholder="Country" value="" class="decorative-input inspectletIgnore">
-                                </div>
-                                <div class="control-group row-space-1" id="inputTel">
-                                    <input type="text" name="user[tel]" placeholder="Phone number" value="" class="decorative-input inspectletIgnore">
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block btn-large">
-                                    Confirm
-                                </button>
+                        {{ form_start(form, {'attr': {'id': 'add_booking', 'class' : 'signup-form', 'accept-charset': 'UTF-8', 'action': ''}}) }}
+                        <div class="signup-form-fields">
+                            {{ form_widget(form.checkinDate) }}
+                            {{ form_widget(form.checkoutDate) }}
+                            {{ form_widget(form.guestsCount) }}
+                            {{ form_widget(form.priceString) }}
+                            {{ form_widget(form.pageId) }}
+                            <div class="control-group row-space-1" id="inputFirst">
+                                {{ form_widget(form.firstName) }}
                             </div>
-                        </form>
+                            <div class="control-group row-space-1" id="inputLast">
+                                {{ form_widget(form.lastName) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputEmail">
+                                {{ form_widget(form.email) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputAddress">
+                                {{ form_widget(form.address) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputCity">
+                                {{ form_widget(form.city) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputZip">
+                                {{ form_widget(form.zip) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputCountry">
+                                {{ form_widget(form.country) }}
+                            </div>
+                            <div class="control-group row-space-1" id="inputTel">
+                                {{ form_widget(form.phone) }}
+                            </div>
+                            {{ form_widget(form.submit) }}
+                        </div>
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>

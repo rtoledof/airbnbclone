@@ -9336,3 +9336,10 @@ a .icon-remove:hover{
 div#new_translate_button_wrapper{
     display: none;
 }
+
+.invalid
+{
+    border-color: #ffb400;
+    background-color: #fff8e5;
+}
+

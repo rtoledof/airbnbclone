@@ -22,22 +22,22 @@ class Calculator
         }
 
         $price = new Currency();
+        $priceValidator = new PriceValidator($price);
+        if (!$priceValidator->validate($context->getPricePerNight(), array())) {
+            $errors[] = $priceValidator->getErrorText();
+        }
         $price->fromString($context->getPricePerNight());
         $number = (int)$price->getNumber();
-        if (!$number) {
-            $errors[] = 'Wrong format of price per night';
-        }
         if (!empty($errors)) {
             return array('errors' => $errors);
         }
 
-        $nightsCount = (int)$checkOutDate->diff($checkInDate)->days;
         if ($checkOutDate <= $checkInDate) {
             return array('errors' => array('Negative days count between ' . $context->getCheckInDate() .
                 ' and ' . $context->getCheckOutDate()));
         }
+        $nightsCount = (int)$checkOutDate->diff($checkInDate)->days;
         $price->setNumber($number * $nightsCount);
-
         return array(
             'nightsCount' => $nightsCount,
             'total' => $price->__toString(),
@@ -54,11 +54,11 @@ class Calculator
      */
     private function createDateTime($inputDate)
     {
-        $checkInDate = \DateTime::createFromFormat('Y-m-d', $inputDate);
-        $errors = \DateTime::getLastErrors();
-        if (!empty($errors['warning_count'])) {
+        $validator = new DateTimeValidator();
+        if(!$validator->validate($inputDate, array())){
             return null;
         }
-        return $checkInDate;
+
+        return $validator->getDate();
     }
 }

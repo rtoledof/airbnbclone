@@ -16,7 +16,7 @@ class Currency
     private $prefixSymbol = '';
 
     /**
-     * @var number
+     * @var number|null
      */
     private $number;
 
@@ -29,6 +29,9 @@ class Currency
         $this->prefixSymbol = (!empty($matches[1])) ? trim($matches[1]) : '';
         $this->number = (!empty($matches[2])) ? trim($matches[2]) : null;
         $this->suffixSymbol = (!empty($matches[3])) ? trim($matches[3]) : '';
+        if ((int)$this->number == 0) {
+            $this->number = null;
+        }
     }
 
     /**

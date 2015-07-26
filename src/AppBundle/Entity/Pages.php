@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Booking;
 use AppBundle\Entity\Images;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -64,6 +65,12 @@ class Pages
     private $sourceUrl;
 
     /**
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="page")
+     * @var ArrayCollection
+     */
+    protected $bookings;
+
+    /**
      * @var string
      * @ORM\Column(name="price", type="string", length=255, unique=false)
      */
@@ -73,6 +80,7 @@ class Pages
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
     }
 
     /**
@@ -231,5 +239,38 @@ class Pages
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * Add bookings
+     *
+     * @param Booking $bookings
+     * @return Pages
+     */
+    public function addBooking(Booking $bookings)
+    {
+        $this->bookings[] = $bookings;
+
+        return $this;
+    }
+
+    /**
+     * Remove bookings
+     *
+     * @param Booking $bookings
+     */
+    public function removeBooking(Booking $bookings)
+    {
+        $this->bookings->removeElement($bookings);
+    }
+
+    /**
+     * Get bookings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
     }
 }
