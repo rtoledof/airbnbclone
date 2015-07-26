@@ -1,0 +1,18 @@
+Booking details:
+Created at: {{ booking.getCreatedAt()|date('Y-m-d') }}
+Check in date: {{ booking.getCheckinDate()|date('Y-m-d') }}
+Check out date: {{ booking.getCheckoutDate()|date('Y-m-d') }}
+Guests count: {{ booking.getGuestsCount() }}
+Price per night: {{ booking.getPriceString() }}
+Nights count: {{ booking.getNightsCount() }}
+Total:  {{ booking.getTotal() }}
+First name: {{ booking.getFirstName() }}
+Last name: {{ booking.getLastName() }}
+Email: {{ booking.getEmail() }}
+Address: {{ booking.getAddress() }}
+City: {{ booking.getCity() }}
+Zip: {{ booking.getZip() }}
+Country: {{ booking.getCountry() }}
+Phone: {{ booking.getPhone() }}
+{%  set pageUrl = url('homepage') ~ 'rooms/' ~ booking.getPageId() %}
+Page link: {{ pageUrl }}

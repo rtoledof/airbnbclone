@@ -158,11 +158,56 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($bookingEntity);
             $em->flush();
+            $this->sendBookingEmail($bookingEntity);
             $response->setData(array('success' => true));
         } else {
             $response->setData(array('errors' => $validatorChain->getFlatenErrors()));
         }
 
         return $response;
+    }
+
+    /**
+     * @param Booking $bookingEntity
+     * @return mixed
+     */
+    private function sendBookingEmail(Booking $bookingEntity)
+    {
+        $defaultFrom = $this->container->getParameter('mailer_default_from_email');
+        $message = \Swift_Message::newInstance()
+            ->setFrom($defaultFrom)
+            ->setSubject('New booking on ' . $this->get('request')->getSchemeAndHttpHost())
+            ->setBody(
+                $this->renderView(
+                    'email/booking.html.twig',
+                    array('booking' => $bookingEntity)
+                ),
+                'text/html'
+            )
+            ->addPart(
+                $this->renderView(
+                    'email/booking.txt.twig',
+                    array('booking' => $bookingEntity)
+                ),
+                'text/plain'
+            );
+
+        return $this->get('mailer')->send($message);
+    }
+
+    /**
+     * @Route("/preview-booking/{bookingid}/{format}", defaults={"format" = "html"})
+     * @Method("GET")
+     * @param int $bookingid
+     * @param string $format
+     * @internal param Request $request
+     * @return JsonResponse
+     */
+    public function previewEmailAction($bookingid, $format){
+        $booking = $this->getDoctrine()
+                   ->getRepository('AppBundle:Booking')
+                   ->find($bookingid);
+
+        return $this->render('email/booking.' . $format . '.twig', array('booking' => $booking));
     }
 }

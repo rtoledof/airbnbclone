@@ -23,6 +23,7 @@
                                 <table class="table transaction-table">
                                     <thead>
                                         <tr>
+                                            <th>Created at</th>
                                             <th>User</th>
                                             <th>Checkin</th>
                                             <th>Checkout</th>
@@ -36,9 +37,10 @@
                                     <tbody>
                                         {% for booking in bookings.getData() %}
                                         <tr>
+                                            <td>{{ booking.getCreatedAt()|date('Y-m-d') }}</td>
                                             <td>{{ booking.getUserDataAsString() }}</td>
-                                            <td>{{ booking.getCheckinDate().format('Y-m-d') }}</td>
-                                            <td>{{ booking.getCheckoutDate().format('Y-m-d') }}</td>
+                                            <td>{{ booking.getCheckinDate()|date('Y-m-d') }}</td>
+                                            <td>{{ booking.getCheckoutDate()|date('Y-m-d') }}</td>
                                             <td>{{ booking.getGuestsCount() }}</td>
                                             <td>{{ booking.getPriceString() }}</td>
                                             <td>{{ booking.getNightsCount() }}</td>
