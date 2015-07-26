@@ -87,8 +87,7 @@ $(function () {
         useCSS: true,
         cssEasing: "ease",
         thumbnail: true,
-        showThumbByDefault: true,
-        animateThumb: false
+        showThumbByDefault: true
     });
 
     $("#submit_location").click(function () {
@@ -140,7 +139,16 @@ $(function () {
         hideFlash();
     });
 
+    $(document).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.subnav-container').removeClass('hide');
+        }
+        else {
+            $('.subnav-container').addClass('hide');
+        }
+    });
 });
+
 
 function cleanupForm(formSelector)
 {

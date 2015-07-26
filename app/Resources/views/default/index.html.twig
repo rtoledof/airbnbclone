@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block body %}
+    <div class="subnav-container hide">
+      <div data-sticky="true" data-transition-at="#summary" aria-hidden="false" class="subnav section-titles hide-md">
+          {{ include('manage/admin-menu.html.twig', { 'curr': '#' }) }}
+      </div>
+    </div>
     <div id="room" itemscope="" itemtype="http://schema.org/Product">
     {% if images['background'] is not empty %}
         <div id="photos" class="with-photos with-modal">
@@ -247,9 +252,12 @@
                         </h4>
                         {% autoescape false %}
                         {{ page.getRawValue('description-summary', '') }}
+                        <hr/>
                         {{ page.getRawValue('description-space') }}
+                        <hr/>
                         {{ page.getRawValue('description-amenities') }}
                         {{ page.getRawValue('description-longtext') }}
+                        <hr/>
                         {{ page.getRawValue('description-house-rules') }}
                         {{ page.getRawValue('description-safety') }}
                         {% endautoescape %}
@@ -314,10 +322,12 @@
                 </div>
             </div>
         </div>
+
         <div id="host-profile" class="room-section webkit-render-fix">
             <div class="page-container-responsive space-top-8 space-8">
                 <div class="row">
                     <div class="col-lg-8">
+                        <hr/>
                         <h4 class="row-space-4 text-center-sm">
                             {{ page.getRawValue('user-about-title') }}
                         </h4>
