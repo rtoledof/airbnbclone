@@ -100,10 +100,13 @@ class ManageController extends Controller
             $em = $container->get('doctrine')->getManager();
             $results = $em->getRepository('AppBundle:Booking')->getExportQuery()->iterate();
             $handle = fopen('php://output', 'r+');
-            $row = $results->next();
-            $headers = array_keys($row[0]->toArray());
-            fputcsv($handle, $headers);
+            $noFirstRow = true;
             while (false !== ($row = $results->next())) {
+                if($noFirstRow){
+$headers = array_keys($row[0]->toArray());
+fputcsv($handle, $headers);
+$noFirstRow = false;
+}
                 $row[0]->setHost($this->get('request')->getSchemeAndHttpHost());
                 fputcsv($handle, $row[0]->toArray());
                 $em->detach($row[0]);
