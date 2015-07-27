@@ -147,12 +147,27 @@ $(function () {
             $('.subnav-container').addClass('hide');
         }
     });
+
+    $(document).find('.tooltip').addClass('hide');
+
+    $("#show-option").tooltip({
+        show: {
+            effect: "slideDown",
+            delay: 250
+        }
+    });
+    //
+    //$(document).tooltip({
+    //    position: {
+    //        my: "center bottom-5",
+    //        at: "center top"
+    //    }
+    //});
 });
 
 
-function cleanupForm(formSelector)
-{
-    if($(formSelector).length){
+function cleanupForm(formSelector) {
+    if ($(formSelector).length) {
         $(formSelector).find('input').val('');
     }
 }

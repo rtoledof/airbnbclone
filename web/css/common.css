@@ -9347,3 +9347,7 @@ div#new_translate_button_wrapper{
     margin: -10px 0 10px 0;
     text-align: right;
 }
+
+a.expandable-trigger-more {
+    z-index: 3001;
+}
