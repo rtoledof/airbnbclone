@@ -8,10 +8,10 @@ parameters:
     mailer_transport: smtp
     mailer_host: smtp.mail.ru
     mailer_user: breathback@mail.ru
-    mailer_password: a650025650025
+    mailer_password: ~
     mailer_auth_mode: plain
-    mailer_default_to_email: posandrey@gmail.com
-    mailer_default_from_email: breathback@mail.ru
+    mailer_default_to_email: no@mail.me
+    mailer_default_from_email: no@mail.me
     mailer_port: 25
     mailer_encryption: tls
-    secret: 12345098
+    secret: ~
