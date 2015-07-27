@@ -16,7 +16,7 @@ class PageRepository extends EntityRepository
         $page = $em->createQuery('SELECT p FROM AppBundle:Pages p WHERE p.id >= :rand ORDER BY p.id ASC')
             ->setParameter('rand', rand(0, $max))
             ->setMaxResults(1)
-            ->getSingleResult();
+            ->getOneOrNullResult();
 
         return $page;
     }

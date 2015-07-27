@@ -54,7 +54,7 @@ class Paginator
         $this->totalCount = $this->paginator->count();
         $this->limit = $limit;
         $this->pagesCount = (int)ceil($this->totalCount / $this->limit);
-        if ($currentPage > $this->pagesCount) {
+        if ($this->pagesCount > 0 && $currentPage > $this->pagesCount) {
             $currentPage = $this->pagesCount;
         }
         $this->currentPage = $currentPage;

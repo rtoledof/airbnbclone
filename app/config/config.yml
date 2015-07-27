@@ -87,3 +87,8 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+gregwar_image:
+    cache_dir:  imgcache
+    throw_exception: false
+    fallback_image: "%kernel.root_dir%/../web/images/placeholder.png"

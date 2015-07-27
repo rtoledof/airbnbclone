@@ -10,6 +10,7 @@
                     </div>
                     <div id="completed-transactions" class="panel-body tab-panel transaction-tab" role="tabpanel"
                          aria-hidden="false">
+                        {% if bookings.getPagesCount() > 0 %}
                         <div class="row">
                             <div class="col-7"></div>
                             <div class="col-5 export-csv-link-container">
@@ -53,6 +54,7 @@
                                 {{ include('paginator.html.twig', { 'paginator': bookings }) }}
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

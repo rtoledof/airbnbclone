@@ -35,8 +35,10 @@
                 <div class="col-md-3 space-sm-4 text-center space-sm-2">
                     <div class="media-photo-badge">
                         <a href="#" class="media-photo media-round">
+                            {% set origImg= "/uploads/" ~ images['user']|first.getPath() %}
+                            {% set thumbImg = web_image(origImg).zoomCrop(115, 115).guess() %}
                             <img alt="User Profile Image" class="host-profile-image"
-                                 data-pin-nopin="true" height="115" src="/uploads/{{ images['user']|first.getPath() }}"
+                                 data-pin-nopin="true" height="115" src="{{ thumbImg }}"
                                  title="{{ page.getRawValue('user-name') }}" width="115">
                         </a>
                     </div>
@@ -269,27 +271,31 @@
                                 <ul id="lightGallery" class="photo-grid row-space-4 row-space-top-4">
                                     {% if(images['gallery']['featured'] is not empty) %}
                                         {% for image in images['gallery']['featured'] %}
-                                            <li data-src="/uploads/{{ image.getPath() }}" class="col-6 featured-height">
-                                                <img src="/uploads/{{ image.getPath() }}" width="330" height="282"
+                                            {% set origImg = "/uploads/" ~ image.getPath() %}
+                                            {% set thumbImg = web_image(origImg).zoomCrop(330, 282).guess() %}
+                                            <li data-src="{{ origImg }}" class="col-6 featured-height">
+                                                <img src="{{ thumbImg }}" width="330" height="282"
                                                      alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
                                     {% endif %}
                                     {% if(images['gallery']['supporting'] is not empty) %}
                                         {% for image in images['gallery']['supporting'] %}
-                                            <li data-src="/uploads/{{ image.getPath() }}"
-                                                class="col-4 supporting-height">
-                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141"
-                                                     alt="{{ image.getTitle() }}"/>
+                                            {% set origImg = "/uploads/" ~ image.getPath() %}
+                                            {% set thumbImg = web_image(origImg).zoomCrop(217, 141).guess() %}
+                                            <li data-src="{{ origImg }}" class="col-4 supporting-height">
+                                                <img src="{{ thumbImg }}" width="217" height="141" alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
                                     {% endif %}
                                     {% if(images['gallery']['last'] is not empty) %}
-                                        <li data-src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                        {% set origImg = "/uploads/" ~ images['gallery']['last'].getPath() %}
+                                        {% set thumbImg = web_image(origImg).zoomCrop(217, 141).guess() %}
+                                        <li data-src="{{ origImg }}"
                                             class="col-4 supporting-height">
                                             {% if(images['gallery']['count'] > 5) %}
                                                 <div class="media-cover media-cover-dark">
-                                                    <img src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                                    <img src="{{ thumbImg }}"
                                                          width="217" height="141"
                                                          alt="{{ images['gallery']['last'].getTitle() }}"/>
                                                 </div>
@@ -301,7 +307,7 @@
                                                     </div>
                                                 </div>
                                             {% else %}
-                                                <img src="/uploads/{{ images['gallery']['last'].getPath() }}"
+                                                <img src="{{ thumbImg }}"
                                                      width="217" height="141"
                                                      alt="{{ images['gallery']['last'].getTitle() }}"/>
                                             {% endif %}
@@ -309,8 +315,10 @@
                                     {% endif %}
                                     {% if(images['gallery']['other'] is not empty) %}
                                         {% for image in images['gallery']['other'] %}
-                                            <li data-src="/uploads/{{ image.getPath() }}" class="hide">
-                                                <img src="/uploads/{{ image.getPath() }}" width="217" height="141"
+                                            {% set origImg = "/uploads/" ~ image.getPath() %}
+                                            {% set thumbImg = web_image(origImg).zoomCrop(217, 141).guess() %}
+                                            <li data-src="{{ origImg }}" class="hide">
+                                                <img src="{{ thumbImg }}" width="217" height="141"
                                                      alt="{{ image.getTitle() }}"/>
                                             </li>
                                         {% endfor %}
@@ -335,8 +343,10 @@
                         <div class="row">
                             <div class="col-md-3 text-center">
                                 <a href="/" class="media-photo media-round">
+                                    {% set origImg = "/uploads/" ~ images['user']|first.getPath() %}
+                                    {% set thumbImg = web_image(origImg).zoomCrop(90, 90).guess() %}
                                     <img alt="{{ page.getRawValue('user-name') }}" data-pin-nopin="true" height="90"
-                                         src="/uploads/{{ images['user']|first.getPath() }}"
+                                         src="{{ thumbImg }}"
                                          title="{{ page.getRawValue('user-name') }}" width="90">
                                 </a>
                             </div>

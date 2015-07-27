@@ -35,37 +35,37 @@
                 </div>
             </div>
         </div>
+        {% if url %}
         <div class="page-container-responsive space-top-4 space-4">
-                <div class="col-md-14">
-                    <div class="panel space-4">
-                        <div class="panel-header">
-                            Result box
-                        </div>
-                        {% if url %}
-                        <div class="panel-body">
-                            <ul class="list-unstyled hdb-light-bg">
-                                <li class="default removable  alert1 " data-alert-id="293943858">
-                                    <div class="row row-table ">
-                                        <div class="col-11 col-middle">
-                                            The page data is successfully parsed. New page is available under
-                                            <a class="dashboard_alert_link" href="{{ url }}" target="_blank">
-                                                this url
-                                            </a>
-                                        </div>
-                                        <div class="col-1 col-middle">
-                                            <a href="#"
-                                               class="pull-right icon-light-gray remove-alert"
-                                               title="Hide">
-                                                <i class="icon icon-remove"></i>
-                                            </a>
-                                        </div>
+            <div class="col-md-14">
+                <div class="panel space-4">
+                    <div class="panel-header">
+                        Result box
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled hdb-light-bg">
+                            <li class="default removable  alert1 " data-alert-id="293943858">
+                                <div class="row row-table ">
+                                    <div class="col-11 col-middle">
+                                        The page data is successfully parsed. New page is available under
+                                        <a class="dashboard_alert_link" href="{{ url }}" target="_blank">
+                                            this url
+                                        </a>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-                        {% endif %}
+                                    <div class="col-1 col-middle">
+                                        <a href="#"
+                                           class="pull-right icon-light-gray remove-alert"
+                                           title="Hide">
+                                            <i class="icon icon-remove"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -70,7 +70,6 @@ class ManageController extends Controller
         $query = $entityManager->getRepository('AppBundle:Booking')->getExportQuery();
         $paginator = new Paginator($query, 20, $currentPage);
         $paginator->setUrl('/manage/bookings');
-
         return $this->render('manage/list-bookings.html.twig', array('bookings' => $paginator));
     }
 

@@ -43,16 +43,18 @@ class DefaultController extends Controller
         if ($id == 'random') {
             $page = $this->getDoctrine()
                 ->getRepository('AppBundle:Pages')->getRandomPage();
+            if(!$page) {
+                return $this->render('default/empty.html.twig');
+            }
         } else {
             $page = $this->getDoctrine()
                 ->getRepository('AppBundle:Pages')
                 ->find($id);
-
-        }
-        if (!$page) {
-            throw $this->createNotFoundException(
-                'No page found for request param ' . $id
-            );
+            if (!$page) {
+                throw $this->createNotFoundException(
+                    'No page found for request param ' . $id
+                );
+            }
         }
         $imagesCollector = new ImagesViewCollector();
 
@@ -158,7 +160,12 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($bookingEntity);
             $em->flush();
-            $this->sendBookingEmail($bookingEntity);
+            try{
+                $this->sendBookingEmail($bookingEntity);
+            }
+            catch (\Exception $e){
+
+            }
             $response->setData(array('success' => true));
         } else {
             $response->setData(array('errors' => $validatorChain->getFlatenErrors()));

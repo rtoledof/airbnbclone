@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('manage/admin-menu.html.twig', { 'curr': '/rooms/random' }) }}
+    <div class="page-container-responsive">
+        <div class="row row-space-top-8 row-space-8">
+            <div class="col-md-5 col-middle">
+                <h1 class="text-jumbo text-ginormous hide-sm">Oops!</h1>
+                <h2>We can't seem to find the page you're looking for. Please check if there are any pages</h2>
+                <h6>Error code: 404</h6>
+            </div>
+            <div class="col-md-5 col-middle text-center">
+                <img src="{{ asset('images/404.gif') }}" width="313" height="428" class="hide-sm" alt="Girl has dropped her ice cream.">
+            </div>
+        </div>
+    </div>
+{% endblock %}
