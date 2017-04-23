@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Dealers;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -18,7 +20,7 @@ class AddForm extends AbstractType
         $builder
             ->setMethod('POST')
             ->setAttribute('id', 'searchbar-form');
-        $builder->add('sourceUrl', 'text', array(
+        $builder->add('sourceUrl', TextType::class, array(
                 'attr' =>
                     array(
                         'class' => 'menu-autocomplete-input form-inline location input-large input-contrast',
@@ -31,7 +33,7 @@ class AddForm extends AbstractType
         )
             ->add(
                 'submit_location',
-                'submit',
+                SubmitType::class,
                 array(
                     'attr' => array(
                         'class' => 'searchbar__submit btn btn-primary btn-large'

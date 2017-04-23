@@ -2,9 +2,14 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingForm extends AbstractType
 {
@@ -33,14 +38,14 @@ class BookingForm extends AbstractType
             ->setAction($this->action);
         $builder
             ->add(
-                $builder->create('checkinDate', 'hidden', array(
+                $builder->create('checkinDate', HiddenType::class, array(
                     'attr' => array(
                         'id' => 'booking-checkin-date'
                     ),
                 ))->addViewTransformer(new DateTimeToStringTransformer())
             )
             ->add(
-                $builder->create('checkoutDate', 'hidden', array(
+                $builder->create('checkoutDate', HiddenType::class, array(
                     'attr' => array(
                         'id' => 'booking-checkout-date'
                     ),
@@ -48,7 +53,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'guestsCount',
-                'hidden',
+                HiddenType::class,
                 array(
                     'attr' => array(
                         'id' => 'booking-checkout-date'
@@ -57,12 +62,12 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'pageId',
-                'hidden'
+                HiddenType::class
             )
             ->add(
 
                 'priceString',
-                'hidden',
+                HiddenType::class,
                 array(
                     'attr' => array(
                         'id' => 'booking-price'
@@ -71,7 +76,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'firstName',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "First name",
@@ -83,7 +88,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'lastName',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Last name",
@@ -95,7 +100,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Email address",
@@ -107,7 +112,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'address',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Address",
@@ -119,7 +124,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'city',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "City",
@@ -132,7 +137,7 @@ class BookingForm extends AbstractType
             ->add(
 
                 'zip',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Postal code",
@@ -144,7 +149,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'country',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Country",
@@ -156,7 +161,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'phone',
-                'text',
+                TextType::class,
                 array(
                     'attr' => array(
                         'placeholder' => "Phone number",
@@ -168,7 +173,7 @@ class BookingForm extends AbstractType
             )
             ->add(
                 'submit',
-                'submit',
+                SubmitType::class,
                 array(
                     'attr' => array(
                         'class' => 'btn btn-primary btn-block btn-large'
@@ -179,12 +184,12 @@ class BookingForm extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Booking',
+            'data_class' => Booking::class,
         ));
     }
 

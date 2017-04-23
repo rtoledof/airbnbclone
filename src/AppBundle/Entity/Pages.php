@@ -295,4 +295,14 @@ class Pages
         }
         return $this->rawContainer->get($key, $default);
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->sourceUrl;
+    }
+
+
 }

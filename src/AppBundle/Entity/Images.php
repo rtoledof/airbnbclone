@@ -174,4 +174,9 @@ class Images
     {
         $this->title = $title;
     }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

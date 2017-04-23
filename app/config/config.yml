@@ -92,3 +92,22 @@ gregwar_image:
     cache_dir:  imgcache
     throw_exception: false
     fallback_image: "%kernel.root_dir%/../web/images/placeholder.png"
+
+easy_admin:
+    list:
+        actions:
+          - {name: 'edit', icon: 'pencil'}
+          - {name: 'search', icon: 'search'}
+          - {name: 'show', icon: 'search'}
+          - {name: 'delete', icon: 'pencil'}
+    site_name: '<img src="http://symfony.com/logos/symfony_white_01.png" />&nbsp;BB Mega'
+    entities:
+        Booking:
+          class: AppBundle\Entity\Booking
+          label: 'Bookings'
+          list:
+              title: "Most recent bookings"
+        Images:
+          class: AppBundle\Entity\Images
+        Pages:
+          class: AppBundle\Entity\Pages

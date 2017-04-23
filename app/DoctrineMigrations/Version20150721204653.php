@@ -21,7 +21,6 @@ class Version20150721204653 extends AbstractMigration
         $this->addSql('CREATE TABLE images (id INT AUTO_INCREMENT NOT NULL, page_id INT NOT NULL, path VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, INDEX IDX_E01FBE6AC4663E4 (page_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pages (id INT AUTO_INCREMENT NOT NULL, date DATETIME NOT NULL, rawdata LONGTEXT NOT NULL COMMENT \'(DC2Type:json_array)\', version VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE images ADD CONSTRAINT FK_E01FBE6AC4663E4 FOREIGN KEY (page_id) REFERENCES pages (id)');
-        $this->addSql('DROP TABLE documents');
     }
 
     /**

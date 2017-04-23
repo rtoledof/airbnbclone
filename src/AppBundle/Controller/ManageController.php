@@ -33,7 +33,7 @@ class ManageController extends Controller
         $page->setVersion('1.0');
         $page->setDate(new \DateTime());
 
-        $form = $this->createForm(new AddForm(), $page);
+        $form = $this->createForm(AddForm::class, $page);
         $form->handleRequest($request);
         $resultUl = null;
         if ($form->isSubmitted() && $form->isValid()) {
